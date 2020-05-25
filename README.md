@@ -1,6 +1,6 @@
 ## AI 꿀벌 Android
 
-[![Author](https://img.shields.io/badge/author-Im--Tae-red.svg)![Language](https://img.shields.io/badge/language-Kotlin-green)]() [![Visual Studio](https://img.shields.io/badge/tools-Android%20Studio-green.svg)]() [![MIT License](https://img.shields.io/badge/license-Apache%20License%202.0-blue)]( https://www.apache.org/licenses/LICENSE-2.0 )
+[![Author](https://img.shields.io/badge/author-Im--Tae-red.svg)]() ![Language](https://img.shields.io/badge/language-Kotlin-green) [![Visual Studio](https://img.shields.io/badge/tools-Android%20Studio-green.svg)]() [![MIT License](https://img.shields.io/badge/license-Apache%20License%202.0-blue)]( https://www.apache.org/licenses/LICENSE-2.0 )
 
 
 
@@ -22,7 +22,7 @@ MVP Architecture
 
 RxJava2
 
-Koin
+Dagger2
 
 DataBinding
 
