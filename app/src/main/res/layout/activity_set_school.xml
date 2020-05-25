@@ -8,123 +8,129 @@
     </data>
 
     <LinearLayout
-        android:background="@android:color/white"
-        android:orientation="vertical"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical"
         tools:context=".ui.LoginActivity">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_weight="1"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
+
             <ImageView
                 android:src="@drawable/bg_honeycomb"
                 android:layout_width="170dp"
                 android:layout_height="130dp"/>
+
         </LinearLayout>
+
         <LinearLayout
             android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
-                android:textColor="#ff9900"
-                android:textSize="15pt"
-                android:fontFamily="@font/apple_eb"
-                android:layout_marginLeft="15dp"
-                android:text="AI 꿀벌"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                style="@style/title_font_dark_orange"
+                android:text="AI 꿀벌" />
+
             <TextView
-                android:textColor="#000000"
-                android:textSize="15pt"
-                android:fontFamily="@font/apple_eb"
-                android:text="을"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                style="@style/title_font_black"
+                android:text="을"/>
+
         </LinearLayout>
-        <TextView
-            android:layout_marginLeft="15dp"
-            android:textColor="#000000"
-            android:textSize="15pt"
-            android:fontFamily="@font/apple_eb"
-            android:text="선택해주셔서 감사합니다."
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            style="@style/title_font_black"
+            android:text="선택해주셔서 감사합니다."/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:layout_marginLeft="15dp"
-            android:textColor="#000000"
-            android:textSize="9pt"
-            android:fontFamily="@font/apple_eb"
+            android:layout_marginStart="15dp"
+            style="@style/content_font_black"
             android:text="학교 설정을 해주세요.\n원하지 않으신다면 '건너뛰기'를 눌러주세요."
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <Button
-            android:layout_gravity="center"
-            android:textSize="11pt"
-            android:textColor="@android:color/secondary_text_light"
-            android:fontFamily="@font/apple_eb"
-            android:text="Done!"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/gray_button"
-            android:layout_width="400dp"
-            android:layout_height="60dp"/>
+            />
 
         <LinearLayout
-            android:layout_gravity="center"
-            android:layout_width="405dp"
-            android:layout_height="wrap_content">
-            <Spinner
-                android:background="@drawable/orange_border"
-                android:layout_marginTop="10dp"
-                android:layout_width="190dp"
-                android:layout_height="60dp"/>
-            <LinearLayout
-                android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            >
+
+            <Button
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/gray_button"
+                style="@style/button_font_black"
+                android:text="Done!"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Spinner
+                    android:layout_width="190dp"
+                    android:layout_height="60dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/orange_border"/>
+
+                <Spinner
+                    android:layout_width="190dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/orange_border"/>
+
+            </LinearLayout>
+
             <Spinner
-                android:background="@drawable/orange_border"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
                 android:layout_marginTop="10dp"
-                android:layout_width="190dp"
-                android:layout_height="60dp"/>
+                android:layout_gravity="center"
+                android:background="@drawable/orange_border"/>
+
+            <Button
+
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/orange_button"
+                style="@style/button_font_white"
+                android:text="학교 설정" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/gray_button"
+                style="@style/button_font_black"
+                android:text="건너뛰기" />
+
         </LinearLayout>
-
-        <Spinner
-            android:layout_gravity="center"
-            android:background="@drawable/orange_border"
-            android:layout_marginTop="10dp"
-            android:layout_width="400dp"
-            android:layout_height="60dp"/>
-
-        <Button
-            android:layout_gravity="center"
-            android:textSize="11pt"
-            android:textColor="@android:color/white"
-            android:fontFamily="@font/apple_eb"
-            android:text="학교 설정"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/orange_button"
-            android:layout_width="400dp"
-            android:layout_height="60dp"/>
-
-        <Button
-            android:layout_gravity="center"
-            android:textSize="11pt"
-            android:textColor="@android:color/secondary_text_light"
-            android:fontFamily="@font/apple_eb"
-            android:text="건너뛰기"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/gray_button"
-            android:layout_width="400dp"
-            android:layout_height="45dp"/>
 
     </LinearLayout>
 

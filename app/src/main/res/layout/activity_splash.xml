@@ -8,27 +8,27 @@
     </data>
 
     <LinearLayout
-        android:background="@android:color/white"
-        android:orientation="vertical"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical"
         tools:context=".ui.SplashActivity">
         
         <ImageView
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="230dp"
-            android:src="@drawable/splash_logo"
             android:layout_width="250dp"
-            android:layout_height="150dp"/>
+            android:layout_height="150dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="230dp"
+            android:src="@drawable/splash_logo" />
 
         <ImageView
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="200dp"
-            android:src="@drawable/honeycomb_logo"
             android:layout_width="60dp"
-            android:layout_height="40dp"/>
+            android:layout_height="40dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="200dp"
+            android:src="@drawable/honeycomb_logo" />
         
     </LinearLayout>
 

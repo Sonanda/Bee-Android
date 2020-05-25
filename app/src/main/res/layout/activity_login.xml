@@ -15,68 +15,67 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.LoginActivity">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_width="0dp" />
+
             <ImageView
-                android:src="@drawable/bg_honeycomb"
                 android:layout_width="170dp"
-                android:layout_height="130dp"/>
+                android:layout_height="130dp"
+                android:src="@drawable/bg_honeycomb"/>
+
         </LinearLayout>
+
         <LinearLayout
-            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
             <TextView
-                android:textColor="#ff9900"
-                android:textSize="15pt"
-                android:fontFamily="@font/apple_eb"
-                android:layout_marginLeft="15dp"
-                android:text="AI 꿀벌"
+                android:layout_marginStart="15dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                style="@style/title_font_dark_orange"
+                android:text="AI 꿀벌"/>
+
             <TextView
-                android:textColor="#000000"
-                android:textSize="15pt"
-                android:fontFamily="@font/apple_eb"
-                android:text="을"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                style="@style/title_font_black"
+                android:text="을"/>
+
         </LinearLayout>
-        <TextView
-            android:layout_marginLeft="15dp"
-            android:textColor="#000000"
-            android:textSize="15pt"
-            android:fontFamily="@font/apple_eb"
-            android:text="선택해주셔서 감사합니다."
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
 
         <TextView
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="15dp"
-            android:textColor="#000000"
-            android:textSize="9pt"
-            android:fontFamily="@font/apple_eb"
-            android:text="본격적인 사용에 앞서\nGoogle 계정을 연결해주세요."
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            style="@style/title_font_black"
+            android:text="선택해주셔서 감사합니다." />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="15dp"
+            style="@style/content_font_black"
+            android:text="본격적인 사용에 앞서\nGoogle 계정을 연결해주세요." />
 
         <Button
-            android:layout_gravity="center"
-            android:textSize="11pt"
-            android:textColor="@android:color/white"
-            android:fontFamily="@font/apple_eb"
-            android:text="Google 계정으로 로그인"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/orange_button"
-            android:layout_width="400dp"
-            android:layout_height="60dp"/>
-
+            style="@style/button_font_white"
+            android:text="Google 계정으로 로그인" />
 
     </LinearLayout>
 </layout>

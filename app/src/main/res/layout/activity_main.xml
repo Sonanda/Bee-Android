@@ -8,101 +8,85 @@
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
-        android:background="@android:color/white"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/white"
         android:fitsSystemWindows="true"
         tools:context=".ui.MainActivity"
-        android:id="@+id/drawer_layout">
+        >
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <!--        여기에 작성 해줘  알앚어-->
+
+            <include layout="@layout/title_bar"/>
+
             <LinearLayout
-                android:layout_marginTop="30dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_marginLeft="35dp"
-                    android:src="@drawable/honeycomb_logo"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"/>
+                android:id="@+id/explainText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
                 <TextView
-                    android:fontFamily="@font/nanum_r"
-                    android:textSize="10pt"
-                    android:textColor="#feb700"
-                    android:text="BEE ASSISTANT"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                <ImageView
-                    android:layout_marginRight="35dp"
-                    android:src="@drawable/menu"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="120dp"
+                    android:layout_marginStart="30dp"
+                    style="@style/title_font_dark_orange"
+                    android:text="'꿀벌'"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    style="@style/title_font_black"
+                    android:text="이라고 불러보세요." />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginStart="30dp"
+                    style="@style/content_font"
+                    android:textColor="#393939"
+                    android:text="&quot;꿀벌, 오늘 중식이 뭐야&quot;" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="30dp"
+                    style="@style/content_font"
+                    android:textColor="#717171"
+                    android:text="&quot;꿀벌, 오늘 해야 할 과제가 뭐야&quot;" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="30dp"
+                    style="@style/content_font"
+                    android:textColor="#989898"
+                    android:text="&quot;꿀벌, 오늘 날씨는 어때&quot;" />
+
             </LinearLayout>
 
-            <TextView
-                android:textSize="15pt"
-                android:layout_marginTop="120dp"
-                android:layout_marginLeft="30dp"
-                android:text="'야, 꿀벌'"
-                android:textColor="#ff9900"
-                android:fontFamily="@font/apple_eb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:textSize="15pt"
-                android:layout_marginLeft="30dp"
-                android:text="이라고 불러보세요."
-                android:textColor="#000000"
-                android:fontFamily="@font/apple_eb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:textSize="8pt"
-                android:layout_marginTop="50dp"
-                android:layout_marginLeft="30dp"
-                android:text="&quot;야, 꿀벌, 오늘 중식이 뭐야&quot;"
-                android:textColor="#393939"
-                android:fontFamily="@font/apple_l"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:textSize="8pt"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="30dp"
-                android:text="&quot;야, 꿀벌, 오늘 해야 할 과제가 뭐야&quot;"
-                android:textColor="#717171"
-                android:fontFamily="@font/apple_l"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:textSize="8pt"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="30dp"
-                android:text="&quot;야, 꿀벌, 오늘 날씨는 어때&quot;"
-                android:textColor="#989898"
-                android:fontFamily="@font/apple_l"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <ImageView
+            <ImageButton
+                android:layout_width="180dp"
+                android:layout_height="180dp"
                 android:layout_marginTop="50dp"
                 android:layout_gravity="center"
-                android:src="@drawable/button"
-                android:layout_width="180dp"
-                android:layout_height="180dp"/>
+                android:src="@drawable/bee"
+                android:scaleType="fitCenter"
+                android:background="@drawable/main_button">
+
+            </ImageButton>
+
         </LinearLayout>
-
-
 
         <com.google.android.material.navigation.NavigationView
             android:layout_width="wrap_content"
