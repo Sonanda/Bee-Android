@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -9,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.gsm.bee_assistant_android"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -77,4 +78,10 @@ dependencies {
 
     // mockito
     testImplementation "org.mockito:mockito-core:2.+"
+
+    // google auth
+    implementation 'com.google.android.gms:play-services-auth:18.0.0'
+
+    implementation 'com.google.firebase:firebase-auth:19.3.1'
+    implementation 'com.google.firebase:firebase-analytics:17.2.2'
 }

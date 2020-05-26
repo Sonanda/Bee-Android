@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "738072808859",
+    "firebase_url": "https://bee-assistant-21819.firebaseio.com",
+    "project_id": "bee-assistant-21819",
+    "storage_bucket": "bee-assistant-21819.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:738072808859:android:9d76087b4037dfcccaa53e",
+        "android_client_info": {
+          "package_name": "com.gsm.bee_assistant_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "738072808859-2hmjmvrhrck5kq1pc8as98ibb2hgabq3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gsm.bee_assistant_android",
+            "certificate_hash": "06577437dadb907facb818092e0e2116c5ca400f"
+          }
+        },
+        {
+          "client_id": "738072808859-n1k66cptei64l0c8geb60repikqeg8og.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpqNF1uBJ6de-fpNYKwAEXz089FnHddQA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "738072808859-n1k66cptei64l0c8geb60repikqeg8og.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

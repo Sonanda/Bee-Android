@@ -2,8 +2,16 @@ package com.gsm.bee_assistant_android.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.base.BaseActivity
 import com.gsm.bee_assistant_android.databinding.ActivityLoginBinding
@@ -17,6 +25,9 @@ class LoginActivity : BaseActivity(), LoginContract.View {
     override lateinit var presenter : LoginContract.Presenter
 
     override lateinit var binding: ActivityLoginBinding
+
+    private lateinit var googleSignInClient : GoogleSignInClient
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +43,23 @@ class LoginActivity : BaseActivity(), LoginContract.View {
         presenter.disposeDisposable()
     }
 
-    override fun init() {}
+    override fun showLogin(signInIntent: Intent) = startActivityForResult(signInIntent, 100)
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        presenter.googleLogin(requestCode, resultCode, data)
+    }
+
+    override fun init() {
+        val googleSignInOptions= GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this,googleSignInOptions)
+
+        presenter.googleSignIn(googleSignInClient.signInIntent)
+    }
 
     override fun showKeyboard() {}
 
@@ -41,4 +68,6 @@ class LoginActivity : BaseActivity(), LoginContract.View {
     override fun showToast(message: String) {}
 
     override fun startActivity(activityName: Class<*>) { startActivity(Intent(this, activityName)) }
+
+    override fun getContext() = this
 }

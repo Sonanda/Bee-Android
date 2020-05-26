@@ -27,6 +27,7 @@ class MainActivity : BaseActivity(), MainContract.View {
         AndroidInjection.inject(this)
     }
 
+
     override fun onDestroy() {
         super.onDestroy()
         presenter.disposeDisposable()
