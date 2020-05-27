@@ -75,16 +75,6 @@
             android:layout_marginEnd="10sp"
             >
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20sp"
-                android:background="@drawable/gray_button"
-                style="@style/button_font_orange"
-                android:clickable="false"
-                android:text="Done!"/>
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
