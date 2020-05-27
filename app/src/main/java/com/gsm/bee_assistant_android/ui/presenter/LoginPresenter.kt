@@ -12,6 +12,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.gsm.bee_assistant_android.di.app.MyApplication
 import com.gsm.bee_assistant_android.ui.contract.LoginContract
 import com.gsm.bee_assistant_android.utils.PreferenceManager
 import io.reactivex.Observable
@@ -62,7 +63,7 @@ class LoginPresenter @Inject constructor(override val view: LoginContract.View) 
             val email = it?.email
             val photoUrl = it?.photoUrl
 
-            pref.setData("user_email", email.toString())
+            pref.setData(MyApplication.Key.EMAIL.toString(), email.toString())
 
             Log.d("test", email.toString())
         }

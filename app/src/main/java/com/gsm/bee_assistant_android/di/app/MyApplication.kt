@@ -6,6 +6,10 @@ import dagger.android.DaggerApplication
 
 class MyApplication : DaggerApplication() {
 
+    enum class Key {
+        EMAIL
+    }
+
     override fun applicationInjector(): AndroidInjector<out DaggerApplication>
             = DaggerAppComponent.builder().application(this).build()
 }

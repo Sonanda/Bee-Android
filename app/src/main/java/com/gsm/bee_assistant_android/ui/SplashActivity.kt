@@ -17,9 +17,6 @@ class SplashActivity : BaseActivity(), SplashContract.View {
     @Inject
     override lateinit var presenter : SplashContract.Presenter
 
-    @Inject
-    lateinit var pref : PreferenceManager
-
     override lateinit var binding: ActivitySplashBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +26,8 @@ class SplashActivity : BaseActivity(), SplashContract.View {
         binding.splash = this
 
         AndroidInjection.inject(this)
+
+        init()
     }
 
     override fun onDestroy() {
@@ -36,7 +35,7 @@ class SplashActivity : BaseActivity(), SplashContract.View {
         presenter.disposeDisposable()
     }
 
-    override fun init() {}
+    override fun init() = presenter.checkUserInfo()
 
     override fun showKeyboard() {}
 
@@ -45,4 +44,6 @@ class SplashActivity : BaseActivity(), SplashContract.View {
     override fun showToast(message: String)  = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
     override fun startActivity(activityName: Class<*>) { startActivity(Intent(this, activityName)) }
+
+    override fun finishActivity() = finish()
 }
