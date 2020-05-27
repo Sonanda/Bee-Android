@@ -30,9 +30,9 @@ class SetSchoolPresenter @Inject constructor(override val view: SetSchoolContrac
 
         user.let {
 
-            val name = it?.displayName
+            //val name = it?.displayName
             val email = it?.email
-            val photoUrl = it?.photoUrl
+            //val photoUrl = it?.photoUrl
 
             pref.setData(MyApplication.Key.EMAIL.toString(), email.toString())
 

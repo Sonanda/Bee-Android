@@ -1,10 +1,11 @@
+@file:Suppress("DEPRECATION")
+
 package com.gsm.bee_assistant_android.utils
 
 import android.content.Context
 import android.preference.PreferenceManager
 import javax.inject.Inject
 
-@Suppress("DEPRECATION")
 class PreferenceManager @Inject constructor(context: Context) {
 
     private val pref = PreferenceManager.getDefaultSharedPreferences(context)
