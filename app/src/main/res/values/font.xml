@@ -36,4 +36,10 @@
         <item name="fontFamily">@font/apple_eb</item>
     </style>
 
+    <style name="button_font_orange">
+        <item name="android:textColor">@color/orangeColor</item>
+        <item name="android:textSize">11pt</item>
+        <item name="fontFamily">@font/apple_eb</item>
+    </style>
+
 </resources>

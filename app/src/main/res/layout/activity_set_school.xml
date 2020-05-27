@@ -82,7 +82,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/gray_button"
-                style="@style/button_font_black"
+                style="@style/button_font_orange"
+                android:clickable="false"
                 android:text="Done!"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -91,35 +92,45 @@
                 android:layout_marginTop="10dp">
 
                 <Spinner
-                    android:id="@+id/state_And_Province_Spinner"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/region_Spinner"
-                    app:layout_constraintStart_toStartOf="parent"
-                   android:layout_marginEnd="10dp"
-                    android:background="@drawable/orange_border"/>
-
-                <Spinner
                     android:id="@+id/region_Spinner"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/state_And_Province_Spinner"
+                    app:layout_constraintEnd_toStartOf="@+id/school_Kind_Spinner"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginEnd="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:entries="@{setschool.presenter.regionList}"
+                    android:overlapAnchor="false"
+                    android:background="@drawable/spinner"/>
+
+                <Spinner
+                    android:id="@+id/school_Kind_Spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/region_Spinner"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:background="@drawable/orange_border" />
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:entries="@{setschool.presenter.schoolKindList}"
+                    android:overlapAnchor="false"
+                    android:background="@drawable/spinner" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Spinner
-                android:id="@+id/school_Spinner"
+                android:id="@+id/schoolName_Spinner"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
-                android:background="@drawable/orange_border"
-                android:spinnerMode="dialog"
-                />
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:entries="@{setschool.presenter.schoolNameList}"
+                android:overlapAnchor="false"
+                android:background="@drawable/spinner"/>
 
             <Button
                 android:layout_width="match_parent"
