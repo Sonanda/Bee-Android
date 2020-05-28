@@ -8,7 +8,6 @@ import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.base.BaseActivity
 import com.gsm.bee_assistant_android.databinding.ActivitySplashBinding
 import com.gsm.bee_assistant_android.ui.contract.SplashContract
-import com.gsm.bee_assistant_android.utils.PreferenceManager
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 

@@ -6,7 +6,6 @@ import com.gsm.bee_assistant_android.ui.MainActivity
 import com.gsm.bee_assistant_android.ui.contract.SplashContract
 import com.gsm.bee_assistant_android.utils.PreferenceManager
 import io.reactivex.Observable
-import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable

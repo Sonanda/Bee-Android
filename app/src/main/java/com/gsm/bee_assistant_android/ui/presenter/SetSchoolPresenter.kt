@@ -11,13 +11,12 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
-class SetSchoolPresenter @Inject constructor(override val view: SetSchoolContract.View) : SetSchoolContract.Presenter {
+class SetSchoolPresenter @Inject constructor(override val view: SetSchoolContract.View, context: Context) : SetSchoolContract.Presenter {
 
     @Inject
     lateinit var pref : PreferenceManager
 
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
-    override val context: Context = view.getContext()
 
     override val regionList: Array<String> = context.resources.getStringArray(R.array.region)
     override val schoolKindList: Array<String> = context.resources.getStringArray(R.array.school_kind)

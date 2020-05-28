@@ -33,6 +33,20 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/gsm/bee_assistant_android/di/module/main/MainActivityModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/gsm/bee_assistant_android/di/module/main/MainActivityModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/gsm/bee_assistant_android/ui/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/gsm/bee_assistant_android/ui/LoginActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/gsm/bee_assistant_android/ui/SetSchoolActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/gsm/bee_assistant_android/ui/SetSchoolActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/gsm/bee_assistant_android/ui/SplashActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/gsm/bee_assistant_android/ui/SplashActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/gsm/bee_assistant_android/ui/contract/LoginContract.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/gsm/bee_assistant_android/ui/contract/LoginContract.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/gsm/bee_assistant_android/ui/presenter/LoginPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/gsm/bee_assistant_android/ui/presenter/LoginPresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/gsm/bee_assistant_android/ui/presenter/SetSchoolPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/gsm/bee_assistant_android/ui/presenter/SetSchoolPresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/gsm/bee_assistant_android/ui/presenter/SplashPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/gsm/bee_assistant_android/ui/presenter/SplashPresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/dark_orange_button.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/dark_orange_button.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/gray_button.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/gray_button.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/orange_button.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/orange_button.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/spinner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/spinner.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,7 +58,7 @@
     <option name="testRunner" value="GRADLE" />
     <option name="delegatedBuild" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_29" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="127.0.0.1:62025" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />

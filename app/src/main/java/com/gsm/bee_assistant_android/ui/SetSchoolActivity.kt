@@ -1,16 +1,13 @@
 package com.gsm.bee_assistant_android.ui
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.base.BaseActivity
 import com.gsm.bee_assistant_android.databinding.ActivitySetSchoolBinding
 import com.gsm.bee_assistant_android.ui.contract.SetSchoolContract
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.activity_set_school.*
 import javax.inject.Inject
 
 class SetSchoolActivity : BaseActivity(), SetSchoolContract.View {
@@ -48,6 +45,4 @@ class SetSchoolActivity : BaseActivity(), SetSchoolContract.View {
     override fun showToast(message: String) {}
 
     override fun startActivity(activityName: Class<*>) { startActivity(Intent(this, activityName)) }
-
-    override fun getContext(): Context = this
 }
