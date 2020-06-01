@@ -7,6 +7,7 @@ import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.di.app.MyApplication
 import com.gsm.bee_assistant_android.retrofit.RetrofitHelper
 import com.gsm.bee_assistant_android.retrofit.domain.SchoolInfo
+import com.gsm.bee_assistant_android.retrofit.network.SchoolInfoApi
 import com.gsm.bee_assistant_android.ui.contract.SetSchoolContract
 import com.gsm.bee_assistant_android.utils.PreferenceManager
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -21,6 +22,9 @@ class SetSchoolPresenter @Inject constructor(override val view: SetSchoolContrac
     @Inject
     lateinit var pref : PreferenceManager
 
+    @Inject
+    lateinit var schoolNameRetrofit: SchoolInfoApi
+
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     override val regionList: Array<String> = context.resources.getStringArray(R.array.region)
@@ -30,8 +34,6 @@ class SetSchoolPresenter @Inject constructor(override val view: SetSchoolContrac
     private val schoolKindIdList: Array<String> = context.resources.getStringArray(R.array.school_kind_id)
     private val regionIdList: Array<String> = context.resources.getStringArray(R.array.region_id)
     private val schoolTypeIdList: Array<String> = context.resources.getStringArray(R.array.school_type_id)
-
-    private val getSchoolInfo = RetrofitHelper.getSchoolInfo()
 
     override fun getUserInfo() {
 
@@ -52,7 +54,7 @@ class SetSchoolPresenter @Inject constructor(override val view: SetSchoolContrac
     override fun getSchoolInfo(schoolKind: String, region: String, schoolType: String) {
 
         addDisposable(
-            getSchoolInfo.getSchoolInfo(apiKey = MyApplication.Api_Key, schoolKind = schoolKind, region =  region, schoolType = schoolType)
+            schoolNameRetrofit.getSchoolInfo(apiKey = MyApplication.Api_Key, schoolKind = schoolKind, region =  region, schoolType = schoolType)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(object : DisposableObserver<SchoolInfo>() {
