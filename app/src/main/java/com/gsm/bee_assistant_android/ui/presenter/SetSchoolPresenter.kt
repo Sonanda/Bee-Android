@@ -53,7 +53,7 @@ class SetSchoolPresenter @Inject constructor(override val view: SetSchoolContrac
 
     override fun getSchoolInfo(schoolKind: String, region: String, schoolType: String) {
 
-        view.setProgressStatus()
+        view.setProgressStatus(true)
 
         addDisposable(
             schoolNameRetrofit.getSchoolInfo(apiKey = MyApplication.Api_Key, schoolKind = schoolKind, region =  region, schoolType = schoolType)
@@ -73,7 +73,7 @@ class SetSchoolPresenter @Inject constructor(override val view: SetSchoolContrac
                         pref.setData("getSchoolInfoTest", schoolInfo.dataSearch.content!![0].schoolName!!)
                     }
 
-                    override fun onComplete() { view.setProgressStatus() }
+                    override fun onComplete() { view.setProgressStatus(false) }
 
                     override fun onError(e: Throwable) { Log.d("error", e.message.toString()) }
                 })

@@ -21,8 +21,6 @@ class SetSchoolActivity : BaseActivity(), SetSchoolContract.View, AdapterView.On
 
     override lateinit var binding: ActivitySetSchoolBinding
 
-    override var progressStatus: Boolean = true
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_school)
@@ -74,13 +72,14 @@ class SetSchoolActivity : BaseActivity(), SetSchoolContract.View, AdapterView.On
 
     override fun startActivity(activityName: Class<*>) { startActivity(Intent(this, activityName)) }
 
-    override fun setProgressStatus() {
+    override fun setProgressStatus(bool: Boolean) {
 
-        progressStatus = !progressStatus
-
-        when(progressStatus) {
-            false -> loading_progress.start()
+        when(bool) {
+            true -> loading_progress.start()
             else -> loading_progress.stop()
         }
+
+        schoolName_spinner.isEnabled = !bool
     }
+
 }

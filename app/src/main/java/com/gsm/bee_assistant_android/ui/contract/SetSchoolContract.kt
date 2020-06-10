@@ -7,9 +7,7 @@ class SetSchoolContract {
 
     interface View : BaseView<Presenter> {
 
-        val progressStatus: Boolean
-
-        fun setProgressStatus()
+        fun setProgressStatus(bool: Boolean)
 
     }
 

@@ -128,7 +128,6 @@
                         android:theme="@style/spinnerTheme"
                         android:entries="@{setschool.presenter.schoolNameList}"
                         android:overlapAnchor="false"
-                        android:enabled="@{setschool.progressStatus}"
                         android:background="@drawable/spinner"/>
 
                     <com.victor.loading.rotate.RotateLoading
