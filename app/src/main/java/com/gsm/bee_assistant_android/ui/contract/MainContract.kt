@@ -5,7 +5,7 @@ import com.gsm.bee_assistant_android.base.BaseView
 
 class MainContract {
 
-    interface View : BaseView<Presenter> {
+    interface View : BaseView<Presenter>, android.view.View.OnClickListener {
 
         fun finishAffinityActivity()
     }

@@ -7,6 +7,7 @@
     <color name="orangeColor">#ffb648</color>
     <color name="darkOrangeColor">#ff9900</color>
     <color name="grayColor">#eeeeee</color>
+    <color name="darkGrayColor">#29000000</color>
 
     <color name="black">@android:color/black</color>
     <color name="white">@android:color/white</color>
