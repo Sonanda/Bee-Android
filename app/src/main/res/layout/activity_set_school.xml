@@ -126,7 +126,7 @@
                         android:theme="@style/spinnerTheme"
                         android:background="@drawable/spinner"/>
 
-                    <com.victor.loading.rotate.RotateLoading
+                    <com.airbnb.lottie.LottieAnimationView
                         android:id="@+id/loading_progress"
                         android:layout_width="40sp"
                         android:layout_height="40sp"
@@ -134,9 +134,10 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:loading_width="3dp"
-                        app:loading_color="@color/orangeColor"
-                        android:layout_centerInParent="true"/>
+                        app:lottie_rawRes="@raw/bee"
+                        android:layout_centerInParent="true"
+                        app:lottie_loop="true"
+                        app:lottie_autoPlay="true" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

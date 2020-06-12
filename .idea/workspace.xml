@@ -25,10 +25,13 @@
     <list default="true" id="d7ff8f1f-af27-402f-b564-5e85b1ba6d4c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/gsm/bee_assistant_android/ui/dialog/SetSchoolDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/gsm/bee_assistant_android/ui/dialog/SetSchoolDialog.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/set_school_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/set_school_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/gsm/bee_assistant_android/ui/SetSchoolActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/gsm/bee_assistant_android/ui/SetSchoolActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_set_school.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_set_school.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +42,7 @@
     <option name="testRunner" value="GRADLE" />
     <option name="delegatedBuild" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_29" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="33006fbdb2b9b553" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -102,7 +105,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/raw" />
     <property name="project.structure.last.edited" value="SDK Location" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -110,10 +113,9 @@
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\ImTae\Documents\GitHub\Bee_Android\app\src\main\res\drawable" />
-      <recent name="C:\Users\ImTae\Documents\GitHub\Bee_Android\app\src\main\res\drawable-hdpi" />
-      <recent name="C:\Users\ImTae\Documents\GitHub\Bee_Android" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ImTae\Documents\GitHub\Bee_Android\app\src\main\java\com\gsm\bee_assistant_android\retrofit\domain" />
+      <recent name="C:\Users\ImTae\Documents\GitHub\Bee_Android\app" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
       <recent name="com.gsm.bee_assistant_android.ui.dialog" />
@@ -124,9 +126,12 @@
     <key name="android.template.packageName">
       <recent name="com.gsm.bee_assistant_android.ui" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\ImTae\Documents\GitHub\Bee_Android\app\src\main\java\com\gsm\bee_assistant_android\retrofit\domain" />
-      <recent name="C:\Users\ImTae\Documents\GitHub\Bee_Android\app" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ImTae\Documents\GitHub\Bee_Android\app\src\main\res\raw" />
+      <recent name="C:\Users\ImTae\Documents\GitHub\Bee_Android\app\src\main\assets" />
+      <recent name="C:\Users\ImTae\Documents\GitHub\Bee_Android\app\src\main\res\drawable" />
+      <recent name="C:\Users\ImTae\Documents\GitHub\Bee_Android\app\src\main\res\drawable-hdpi" />
+      <recent name="C:\Users\ImTae\Documents\GitHub\Bee_Android" />
     </key>
   </component>
   <component name="RunManager" selected="Android App.app">

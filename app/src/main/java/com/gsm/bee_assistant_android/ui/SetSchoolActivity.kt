@@ -77,8 +77,8 @@ class SetSchoolActivity : BaseActivity(), SetSchoolContract.View, AdapterView.On
     override fun setProgressStatus(bool: Boolean) {
 
         when(bool) {
-            true -> loading_progress.start()
-            else -> loading_progress.stop()
+            true -> loading_progress.visibility = View.VISIBLE
+            else -> loading_progress.visibility = View.INVISIBLE
         }
 
         school_Name_spinner.isEnabled = !bool
