@@ -5,9 +5,8 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import com.gsm.bee_assistant_android.R
-import javax.inject.Inject
 
-class ProgressUtil @Inject constructor(context: Context) {
+class ProgressUtil(context: Context) {
 
     private var dialog : Dialog = Dialog(context).apply {
         setContentView(R.layout.progress_bar)

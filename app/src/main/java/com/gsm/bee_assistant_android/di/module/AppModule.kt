@@ -22,9 +22,4 @@ class AppModule {
     @Provides
     @Singleton
     fun provideNetworkStatus(context: Context) = NetworkUtil(context)
-
-    @Provides
-    @Singleton
-    fun provideProgressBar(context: Context) = ProgressUtil(context)
-
 }
