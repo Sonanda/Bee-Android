@@ -37,8 +37,6 @@ class MainActivity : BaseActivity(), MainContract.View {
         AndroidInjection.inject(this)
 
         init()
-
-        onClickChangeSchoolButton()
     }
 
     override fun init() {

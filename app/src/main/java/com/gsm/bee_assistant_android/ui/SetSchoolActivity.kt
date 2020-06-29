@@ -56,8 +56,12 @@ class SetSchoolActivity : BaseActivity(), SetSchoolContract.View, AdapterView.On
             R.id.setSchool_button -> {
                 presenter.setSchoolName(school_Name_spinner.selectedItem.toString())
                 startActivity(MainActivity::class.java)
+                finish()
             }
-            R.id.skip_button -> startActivity(MainActivity::class.java)
+            R.id.skip_button -> {
+                startActivity(MainActivity::class.java)
+                finish()
+            }
         }
     }
 
