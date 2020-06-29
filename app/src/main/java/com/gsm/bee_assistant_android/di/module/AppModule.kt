@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.gsm.bee_assistant_android.di.app.MyApplication
 import com.gsm.bee_assistant_android.utils.NetworkUtil
+import com.gsm.bee_assistant_android.utils.ProgressUtil
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -21,5 +22,9 @@ class AppModule {
     @Provides
     @Singleton
     fun provideNetworkStatus(context: Context) = NetworkUtil(context)
+
+    @Provides
+    @Singleton
+    fun provideProgressBar(context: Context) = ProgressUtil(context)
 
 }

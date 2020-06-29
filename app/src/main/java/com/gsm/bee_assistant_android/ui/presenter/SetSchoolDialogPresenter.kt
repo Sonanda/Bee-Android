@@ -35,35 +35,39 @@ class SetSchoolDialogPresenter @Inject constructor(override val view: SetSchoolD
 
         schoolNameList.clear()
 
-        for (i in 0 until 3) {
+        view.showProgress()
 
-            addDisposable(
-                schoolNameRetrofit.getAllSchoolInfo(apiKey = MyApplication.Api_Key, schoolKind = schoolKindIdList[i], perPage = "10000")
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .retryWhen {
-                        Observable.interval(3, TimeUnit.SECONDS)
-                            .retryUntil {
-                                if(networkStatus.networkInfo())
-                                    return@retryUntil true
+        compositeDisposable.add(
+            Observable.range(0, 3)
+                .subscribe{
+                    schoolNameRetrofit.getAllSchoolInfo(apiKey = MyApplication.Api_Key, schoolKind = schoolKindIdList[it], perPage = "10000")
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .retryWhen {
+                            Observable.interval(3, TimeUnit.SECONDS)
+                                .retryUntil {
+                                    if(networkStatus.networkInfo())
+                                        return@retryUntil true
 
-                                false
-                            }
-                    }
-                    .subscribeWith(object : DisposableObserver<SchoolInfo>() {
-                        override fun onNext(schoolInfo: SchoolInfo) {
-
-                            for(index in 0 until schoolInfo.dataSearch!!.content!!.size) {
-                                schoolNameList.add(schoolInfo.dataSearch.content!![index].schoolName!!)
-                            }
+                                    false
+                                }
                         }
+                        .subscribeWith(object : DisposableObserver<SchoolInfo>() {
+                            override fun onNext(schoolInfo: SchoolInfo) {
 
-                        override fun onComplete() { }
+                                for(index in 0 until schoolInfo.dataSearch!!.content!!.size) {
+                                    schoolNameList.add(schoolInfo.dataSearch.content!![index].schoolName!!)
+                                }
+                            }
 
-                        override fun onError(e: Throwable) { Log.d("error", e.message.toString()) }
-                    })
-            )
-        }
+                            override fun onComplete() { if (it < 1) view.hideProgress() }
+
+                            override fun onError(e: Throwable) { Log.d("error", e.message.toString()) }
+                        })
+                }
+        )
+
+
 
         return schoolNameList
     }

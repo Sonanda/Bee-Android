@@ -1,6 +1,5 @@
 package com.gsm.bee_assistant_android.ui
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -10,28 +9,14 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ArrayAdapter
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.base.BaseDialogFragment
-import com.gsm.bee_assistant_android.di.app.MyApplication
-import com.gsm.bee_assistant_android.retrofit.domain.SchoolInfo
-import com.gsm.bee_assistant_android.retrofit.network.SchoolInfoApi
 import com.gsm.bee_assistant_android.ui.contract.SetSchoolDialogContract
-import com.gsm.bee_assistant_android.utils.NetworkUtil
-import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
+import com.gsm.bee_assistant_android.utils.ProgressUtil
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
-import io.reactivex.observers.DisposableObserver
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.search_bar.*
 import kotlinx.android.synthetic.main.set_school_dialog.*
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class SetSchoolDialogFragment : BaseDialogFragment(), SetSchoolDialogContract.View {
@@ -39,12 +24,17 @@ class SetSchoolDialogFragment : BaseDialogFragment(), SetSchoolDialogContract.Vi
     @Inject
     override lateinit var presenter: SetSchoolDialogContract.Presenter
 
+    //@Inject lateinit var progress: ProgressUtil
+
+    private lateinit var progress : ProgressUtil
+
     override lateinit var binding: ViewDataBinding
 
     var listener: (String) -> Unit = { _ -> }
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
+        progress = ProgressUtil(this.context!!)
         super.onAttach(context)
     }
 
@@ -101,6 +91,10 @@ class SetSchoolDialogFragment : BaseDialogFragment(), SetSchoolDialogContract.Vi
         }
 
     }
+
+    override fun showProgress() = progress.show()
+
+    override fun hideProgress() = progress.hide()
 
     override fun showToast(message: String) {}
 
