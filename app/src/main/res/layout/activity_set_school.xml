@@ -95,8 +95,9 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         android:entries="@{setschool.presenter.regionList}"
-                        android:background="@drawable/spinner"
-                        android:theme="@style/spinnerTheme" />
+                        android:spinnerMode="dialog"
+                        android:theme="@style/spinnerTheme"
+                        android:background="@drawable/spinner" />
 
                     <Spinner
                         android:id="@+id/school_Kind_spinner"
@@ -106,6 +107,7 @@
                         app:layout_constraintStart_toEndOf="@+id/region_spinner"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:entries="@{setschool.presenter.schoolKindList}"
+                        android:spinnerMode="dialog"
                         android:theme="@style/spinnerTheme"
                         android:background="@drawable/spinner" />
 
@@ -123,6 +125,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         android:entries="@{setschool.presenter.schoolNameList}"
+                        android:spinnerMode="dialog"
                         android:theme="@style/spinnerTheme"
                         android:background="@drawable/spinner"/>
 
