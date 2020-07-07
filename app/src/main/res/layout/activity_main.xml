@@ -4,7 +4,7 @@
     <data>
         <variable
             name="main"
-            type="com.gsm.bee_assistant_android.ui.MainActivity" />
+            type="com.gsm.bee_assistant_android.ui.main.MainActivity" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:background="@android:color/white"
         android:fitsSystemWindows="true"
-        tools:context=".ui.MainActivity">
+        tools:context=".ui.main.MainActivity">
 
         <LinearLayout
             android:orientation="vertical"

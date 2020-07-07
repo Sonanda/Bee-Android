@@ -1,4 +1,4 @@
-package com.gsm.bee_assistant_android.ui.presenter
+package com.gsm.bee_assistant_android.ui.setschool
 
 import android.content.Context
 import android.util.Log
@@ -6,7 +6,6 @@ import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.di.app.MyApplication
 import com.gsm.bee_assistant_android.retrofit.domain.SchoolInfo
 import com.gsm.bee_assistant_android.retrofit.network.SchoolInfoApi
-import com.gsm.bee_assistant_android.ui.contract.SetSchoolContract
 import com.gsm.bee_assistant_android.utils.NetworkUtil
 import com.gsm.bee_assistant_android.utils.PreferenceManager
 import io.reactivex.Observable

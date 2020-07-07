@@ -1,8 +1,8 @@
 package com.gsm.bee_assistant_android.di.module.main
 
-import com.gsm.bee_assistant_android.ui.MainActivity
-import com.gsm.bee_assistant_android.ui.contract.MainContract
-import com.gsm.bee_assistant_android.ui.presenter.MainPresenter
+import com.gsm.bee_assistant_android.ui.main.MainActivity
+import com.gsm.bee_assistant_android.ui.main.MainContract
+import com.gsm.bee_assistant_android.ui.main.MainPresenter
 import dagger.Binds
 import dagger.Module
 

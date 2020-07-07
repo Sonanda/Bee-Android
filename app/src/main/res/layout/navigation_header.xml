@@ -5,7 +5,7 @@
     <data>
         <variable
             name="headerNavigation"
-            type="com.gsm.bee_assistant_android.ui.MainActivity" />
+            type="com.gsm.bee_assistant_android.ui.main.MainActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

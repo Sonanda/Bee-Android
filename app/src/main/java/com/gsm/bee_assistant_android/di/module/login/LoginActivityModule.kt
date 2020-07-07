@@ -1,8 +1,8 @@
 package com.gsm.bee_assistant_android.di.module.login
 
-import com.gsm.bee_assistant_android.ui.LoginActivity
-import com.gsm.bee_assistant_android.ui.contract.LoginContract
-import com.gsm.bee_assistant_android.ui.presenter.LoginPresenter
+import com.gsm.bee_assistant_android.ui.login.LoginActivity
+import com.gsm.bee_assistant_android.ui.login.LoginContract
+import com.gsm.bee_assistant_android.ui.login.LoginPresenter
 import dagger.Binds
 import dagger.Module
 

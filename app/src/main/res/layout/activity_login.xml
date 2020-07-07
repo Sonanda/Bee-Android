@@ -4,7 +4,7 @@
     <data>
         <variable
             name="login"
-            type="com.gsm.bee_assistant_android.ui.LoginActivity" />
+            type="com.gsm.bee_assistant_android.ui.login.LoginActivity" />
     </data>
 
     <LinearLayout
@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@android:color/white"
-        tools:context=".ui.LoginActivity">
+        tools:context=".ui.login.LoginActivity">
 
         <LinearLayout
             android:layout_width="match_parent"

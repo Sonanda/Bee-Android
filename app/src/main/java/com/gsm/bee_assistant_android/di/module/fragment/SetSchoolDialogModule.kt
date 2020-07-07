@@ -1,8 +1,8 @@
 package com.gsm.bee_assistant_android.di.module.fragment
 
-import com.gsm.bee_assistant_android.ui.SetSchoolDialogFragment
-import com.gsm.bee_assistant_android.ui.contract.SetSchoolDialogContract
-import com.gsm.bee_assistant_android.ui.presenter.SetSchoolDialogPresenter
+import com.gsm.bee_assistant_android.ui.setschool_dialog.SetSchoolDialogFragment
+import com.gsm.bee_assistant_android.ui.setschool_dialog.SetSchoolDialogContract
+import com.gsm.bee_assistant_android.ui.setschool_dialog.SetSchoolDialogPresenter
 import dagger.Binds
 import dagger.Module
 

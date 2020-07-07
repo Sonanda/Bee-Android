@@ -1,8 +1,8 @@
 package com.gsm.bee_assistant_android.di.module.splash
 
-import com.gsm.bee_assistant_android.ui.SplashActivity
-import com.gsm.bee_assistant_android.ui.contract.SplashContract
-import com.gsm.bee_assistant_android.ui.presenter.SplashPresenter
+import com.gsm.bee_assistant_android.ui.splash.SplashActivity
+import com.gsm.bee_assistant_android.ui.splash.SplashContract
+import com.gsm.bee_assistant_android.ui.splash.SplashPresenter
 import dagger.Binds
 import dagger.Module
 

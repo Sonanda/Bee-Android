@@ -1,8 +1,7 @@
-package com.gsm.bee_assistant_android.ui
+package com.gsm.bee_assistant_android.ui.setschool_dialog
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import android.widget.ArrayAdapter
 import androidx.databinding.ViewDataBinding
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.base.BaseDialogFragment
-import com.gsm.bee_assistant_android.ui.contract.SetSchoolDialogContract
 import com.gsm.bee_assistant_android.utils.ProgressUtil
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.Observable

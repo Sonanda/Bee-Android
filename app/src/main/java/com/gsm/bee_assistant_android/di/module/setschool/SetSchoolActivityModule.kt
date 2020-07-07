@@ -1,8 +1,8 @@
 package com.gsm.bee_assistant_android.di.module.setschool
 
-import com.gsm.bee_assistant_android.ui.SetSchoolActivity
-import com.gsm.bee_assistant_android.ui.contract.SetSchoolContract
-import com.gsm.bee_assistant_android.ui.presenter.SetSchoolPresenter
+import com.gsm.bee_assistant_android.ui.setschool.SetSchoolActivity
+import com.gsm.bee_assistant_android.ui.setschool.SetSchoolContract
+import com.gsm.bee_assistant_android.ui.setschool.SetSchoolPresenter
 import dagger.Binds
 import dagger.Module
 

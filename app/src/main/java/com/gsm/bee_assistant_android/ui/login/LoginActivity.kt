@@ -1,4 +1,4 @@
-package com.gsm.bee_assistant_android.ui
+package com.gsm.bee_assistant_android.ui.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.base.BaseActivity
 import com.gsm.bee_assistant_android.databinding.ActivityLoginBinding
-import com.gsm.bee_assistant_android.ui.contract.LoginContract
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 

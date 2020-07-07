@@ -1,4 +1,4 @@
-package com.gsm.bee_assistant_android.ui.contract
+package com.gsm.bee_assistant_android.ui.login
 
 import android.content.Intent
 import com.gsm.bee_assistant_android.base.BasePresenter

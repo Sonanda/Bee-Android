@@ -1,9 +1,8 @@
-package com.gsm.bee_assistant_android.ui.presenter
+package com.gsm.bee_assistant_android.ui.main
 
 import com.google.firebase.auth.FirebaseAuth
 import com.gsm.bee_assistant_android.di.app.MyApplication
-import com.gsm.bee_assistant_android.ui.LoginActivity
-import com.gsm.bee_assistant_android.ui.contract.MainContract
+import com.gsm.bee_assistant_android.ui.login.LoginActivity
 import com.gsm.bee_assistant_android.utils.PreferenceManager
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable

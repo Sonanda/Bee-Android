@@ -1,15 +1,12 @@
-package com.gsm.bee_assistant_android.ui.presenter
+package com.gsm.bee_assistant_android.ui.splash
 
 import com.gsm.bee_assistant_android.di.app.MyApplication
-import com.gsm.bee_assistant_android.ui.LoginActivity
-import com.gsm.bee_assistant_android.ui.MainActivity
-import com.gsm.bee_assistant_android.ui.contract.SplashContract
+import com.gsm.bee_assistant_android.ui.login.LoginActivity
+import com.gsm.bee_assistant_android.ui.main.MainActivity
 import com.gsm.bee_assistant_android.utils.PreferenceManager
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -23,7 +20,8 @@ class SplashPresenter @Inject constructor(override val view: SplashContract.View
     override fun checkUserInfo() {
 
         when {
-            pref.getData(MyApplication.Key.EMAIL.toString()) != "" -> view.startActivity(MainActivity::class.java).apply { view.finishActivity() }
+            pref.getData(MyApplication.Key.EMAIL.toString()) != "" -> view.startActivity(
+                MainActivity::class.java).apply { view.finishActivity() }
 
             else ->
                 addDisposable(

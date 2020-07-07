@@ -4,7 +4,7 @@
     <data>
         <variable
             name="splash"
-            type="com.gsm.bee_assistant_android.ui.SplashActivity" />
+            type="com.gsm.bee_assistant_android.ui.splash.SplashActivity" />
     </data>
 
     <LinearLayout
@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
-        tools:context=".ui.SplashActivity">
+        tools:context=".ui.splash.SplashActivity">
         
         <ImageView
             android:layout_width="250dp"

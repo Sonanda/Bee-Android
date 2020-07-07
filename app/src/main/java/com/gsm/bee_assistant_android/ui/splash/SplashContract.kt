@@ -1,4 +1,4 @@
-package com.gsm.bee_assistant_android.ui.contract
+package com.gsm.bee_assistant_android.ui.splash
 
 import com.gsm.bee_assistant_android.base.BasePresenter
 import com.gsm.bee_assistant_android.base.BaseView

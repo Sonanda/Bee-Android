@@ -1,13 +1,11 @@
-package com.gsm.bee_assistant_android.ui.presenter
+package com.gsm.bee_assistant_android.ui.login
 
 import android.content.Intent
-import android.util.Log
 import com.google.android.gms.auth.api.Auth
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.gsm.bee_assistant_android.di.app.MyApplication
-import com.gsm.bee_assistant_android.ui.SetSchoolActivity
-import com.gsm.bee_assistant_android.ui.contract.LoginContract
+import com.gsm.bee_assistant_android.ui.setschool.SetSchoolActivity
 import com.gsm.bee_assistant_android.utils.PreferenceManager
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable

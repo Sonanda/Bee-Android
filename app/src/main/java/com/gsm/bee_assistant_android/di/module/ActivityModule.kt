@@ -5,10 +5,10 @@ import com.gsm.bee_assistant_android.di.module.main.MainActivityModule
 import com.gsm.bee_assistant_android.di.module.setschool.SetSchoolActivityModule
 import com.gsm.bee_assistant_android.di.module.splash.SplashActivityModule
 import com.gsm.bee_assistant_android.di.scope.ActivityScope
-import com.gsm.bee_assistant_android.ui.LoginActivity
-import com.gsm.bee_assistant_android.ui.MainActivity
-import com.gsm.bee_assistant_android.ui.SetSchoolActivity
-import com.gsm.bee_assistant_android.ui.SplashActivity
+import com.gsm.bee_assistant_android.ui.login.LoginActivity
+import com.gsm.bee_assistant_android.ui.main.MainActivity
+import com.gsm.bee_assistant_android.ui.setschool.SetSchoolActivity
+import com.gsm.bee_assistant_android.ui.splash.SplashActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

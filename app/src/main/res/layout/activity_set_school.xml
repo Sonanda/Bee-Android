@@ -6,14 +6,14 @@
     <data>
         <variable
             name="setschool"
-            type="com.gsm.bee_assistant_android.ui.SetSchoolActivity" />
+            type="com.gsm.bee_assistant_android.ui.setschool.SetSchoolActivity" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.LoginActivity">
+        tools:context=".ui.login.LoginActivity">
 
         <LinearLayout
             android:layout_width="match_parent"

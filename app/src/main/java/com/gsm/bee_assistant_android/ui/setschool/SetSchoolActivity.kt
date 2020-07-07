@@ -1,17 +1,16 @@
-package com.gsm.bee_assistant_android.ui
+package com.gsm.bee_assistant_android.ui.setschool
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.base.BaseActivity
 import com.gsm.bee_assistant_android.databinding.ActivitySetSchoolBinding
-import com.gsm.bee_assistant_android.ui.contract.SetSchoolContract
+import com.gsm.bee_assistant_android.ui.main.MainActivity
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_set_school.*
 import javax.inject.Inject
