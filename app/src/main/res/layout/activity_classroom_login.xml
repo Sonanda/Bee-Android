@@ -125,6 +125,7 @@
                     android:layout_gravity="center"
                     android:minHeight="40sp"
                     android:minWidth="40sp"
+                    android:inputType="text"
                     android:background="@drawable/dark_orange_border"
                     style="@style/content_font_black" />
 

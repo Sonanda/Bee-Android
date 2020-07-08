@@ -2,6 +2,7 @@ package com.gsm.bee_assistant_android.ui.main
 
 import com.google.firebase.auth.FirebaseAuth
 import com.gsm.bee_assistant_android.di.app.MyApplication
+import com.gsm.bee_assistant_android.retrofit.domain.ClassroomToken
 import com.gsm.bee_assistant_android.ui.login.google.GoogleLoginActivity
 import com.gsm.bee_assistant_android.utils.PreferenceManager
 import io.reactivex.Observable
@@ -31,6 +32,7 @@ class MainPresenter @Inject constructor(override val view: MainContract.View) : 
         pref.let {
             it.setData(MyApplication.Key.EMAIL.toString(), "")
             it.setData(MyApplication.Key.SCHOOL_NAME.toString(), "")
+            it.setClassroomToken(MyApplication.Key.CLASSROOM_TOKEN.toString(), ClassroomToken(access_token = null, refresh_token = null))
         }
 
         addDisposable(

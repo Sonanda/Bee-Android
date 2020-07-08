@@ -8,6 +8,7 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.databinding.ActivityClassroomLoginBinding
+import com.gsm.bee_assistant_android.retrofit.domain.ClassroomToken
 import com.gsm.bee_assistant_android.ui.setschool.SetSchoolActivity
 import com.gsm.bee_assistant_android.utils.ProgressUtil
 import com.jakewharton.rxbinding4.view.clicks
@@ -43,13 +44,6 @@ class ClassroomLoginActivity : AppCompatActivity(), ClassroomLoginContract.View 
         presenter.disposeDisposable()
     }
 
-    override fun onPause() {
-        super.onPause()
-
-        classroom_connect_layout.visibility = View.GONE
-        input_classroomToken_layout.visibility = View.VISIBLE
-    }
-
     override fun showClassroomWebView(url: String) = startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
 
     override fun finishActivity() = finish()
@@ -64,17 +58,31 @@ class ClassroomLoginActivity : AppCompatActivity(), ClassroomLoginContract.View 
 
     override fun startActivity(activityName: Class<*>) { startActivity(Intent(this, activityName)) }
 
-    override fun onClickClassroomButton() = presenter.getClassroomUrl()
+    override fun onClickClassroomButton() = presenter.getClassroomUrl().apply { changeVisibility(true) }
 
-    override fun onClickSkipButton() = startActivity(SetSchoolActivity::class.java)
+    override fun onClickSkipButton() = startActivity(SetSchoolActivity::class.java).apply { presenter.setClassroomToken(ClassroomToken(access_token = "", refresh_token = "")); finish() }
 
     override fun onClickCheckButton() = presenter.getClassroomToken(token_editText.text.toString())
 
     override fun onBackPressed() {
 
-        classroom_connect_layout.visibility = View.VISIBLE
-        input_classroomToken_layout.visibility = View.GONE
+        changeVisibility(false)
 
         // super.onBackPressed()
+    }
+
+    private fun changeVisibility(bool: Boolean) {
+
+        when(bool) {
+            true -> {
+                classroom_connect_layout.visibility = View.GONE
+                input_classroomToken_layout.visibility = View.VISIBLE
+            }
+
+            false-> {
+                classroom_connect_layout.visibility = View.VISIBLE
+                input_classroomToken_layout.visibility = View.GONE
+            }
+        }
     }
 }

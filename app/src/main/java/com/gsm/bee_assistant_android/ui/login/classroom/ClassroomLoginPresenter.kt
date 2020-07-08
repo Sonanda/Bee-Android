@@ -52,17 +52,18 @@ class ClassroomLoginPresenter @Inject constructor(override val view: ClassroomLo
                 .subscribeWith(object: DisposableObserver<ClassroomToken>(){
                     override fun onNext(classroomToken: ClassroomToken) {
 
-                        pref.setClassroomToken(MyApplication.Key.CLASSROOM_TOKEN.toString(), classroomToken)
+                        setClassroomToken(classroomToken)
 
-                        Log.d("classroomToken", classroomToken.access_token)
+                        Log.d("classroomToken", classroomToken.access_token.toString())
                     }
 
                     override fun onComplete() {
                         view.hideProgress().apply {
-                            if (pref.getData(MyApplication.Key.EMAIL.toString()) != "")
+                            if (pref.getData(MyApplication.Key.EMAIL.toString()) != "") {
                                 view.startActivity(SetSchoolActivity::class.java)
-                            else
                                 view.finishActivity()
+                            }
+                            else view.finishActivity()
                         }
                     }
 
@@ -70,6 +71,8 @@ class ClassroomLoginPresenter @Inject constructor(override val view: ClassroomLo
                 })
         )
     }
+
+    override fun setClassroomToken(classroomToken: ClassroomToken) { pref.setClassroomToken(MyApplication.Key.CLASSROOM_TOKEN.toString(), classroomToken) }
 
     override fun addDisposable(disposable: Disposable) { compositeDisposable.add(disposable) }
 

@@ -39,6 +39,8 @@ class SetSchoolActivity : BaseActivity(), SetSchoolContract.View, AdapterView.On
         presenter.disposeDisposable()
     }
 
+    override fun onBackPressed() {}
+
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         Log.d("spinnerTest", school_Kind_spinner.selectedItem.toString())
 
