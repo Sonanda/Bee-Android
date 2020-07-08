@@ -20,8 +20,7 @@ class SplashPresenter @Inject constructor(override val view: SplashContract.View
     override fun checkUserInfo() {
 
         when {
-            pref.getData(MyApplication.Key.EMAIL.toString()) != "" -> view.startActivity(
-                MainActivity::class.java).apply { view.finishActivity() }
+            pref.getData(MyApplication.Key.EMAIL.toString()) != "" -> view.startActivity(MainActivity::class.java).apply { view.finishActivity() }
 
             else ->
                 addDisposable(

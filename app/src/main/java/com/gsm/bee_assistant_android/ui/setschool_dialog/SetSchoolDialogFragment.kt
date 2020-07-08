@@ -24,7 +24,7 @@ class SetSchoolDialogFragment : BaseDialogFragment(), SetSchoolDialogContract.Vi
 
     override lateinit var binding: ViewDataBinding
 
-    lateinit var progress: ProgressUtil
+    private lateinit var progress: ProgressUtil
 
     var listener: (String) -> Unit = { _ -> }
 

@@ -8,6 +8,8 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.databinding.ActivityClassroomLoginBinding
+import com.gsm.bee_assistant_android.ui.setschool.SetSchoolActivity
+import com.gsm.bee_assistant_android.utils.ProgressUtil
 import com.jakewharton.rxbinding4.view.clicks
 import dagger.android.AndroidInjection
 import io.reactivex.Observable
@@ -21,6 +23,8 @@ class ClassroomLoginActivity : AppCompatActivity(), ClassroomLoginContract.View 
     @Inject
     override lateinit var presenter: ClassroomLoginContract.Presenter
 
+    lateinit var progress: ProgressUtil
+
     override lateinit var binding: ActivityClassroomLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +32,8 @@ class ClassroomLoginActivity : AppCompatActivity(), ClassroomLoginContract.View 
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_classroom_login)
         binding.classroomLogin = this
+
+        progress = ProgressUtil(this)
 
         AndroidInjection.inject(this)
     }
@@ -46,27 +52,23 @@ class ClassroomLoginActivity : AppCompatActivity(), ClassroomLoginContract.View 
 
     override fun showClassroomWebView(url: String) = startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
 
-    override fun finishActivity() {
+    override fun finishActivity() = finish()
 
-    }
+    override fun init() {}
 
-    override fun init() {
+    override fun showToast(message: String) {}
 
-    }
+    override fun showProgress() = progress.show()
 
-    override fun showToast(message: String) {
+    override fun hideProgress() = progress.hide()
 
-    }
-
-    override fun startActivity(activityName: Class<*>) {
-
-    }
+    override fun startActivity(activityName: Class<*>) { startActivity(Intent(this, activityName)) }
 
     override fun onClickClassroomButton() = presenter.getClassroomUrl()
 
-    override fun onClickSkipButton() {
-        
-    }
+    override fun onClickSkipButton() = startActivity(SetSchoolActivity::class.java)
+
+    override fun onClickCheckButton() = presenter.getClassroomToken(token_editText.text.toString())
 
     override fun onBackPressed() {
 

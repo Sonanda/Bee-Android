@@ -1,6 +1,7 @@
 package com.gsm.bee_assistant_android.di.module
 
 import com.gsm.bee_assistant_android.di.app.MyApplication
+import com.gsm.bee_assistant_android.retrofit.network.ClassroomApi
 import com.gsm.bee_assistant_android.retrofit.network.SchoolInfoApi
 import dagger.Module
 import dagger.Provides
@@ -36,5 +37,19 @@ class NetworkModule {
             .build()
 
         return retrofit.create(SchoolInfoApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideClassroomRetrofit() : ClassroomApi {
+
+        val retrofit = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(provideOkHttpClient())
+            .baseUrl(MyApplication.Base_Url)
+            .build()
+
+        return retrofit.create(ClassroomApi::class.java)
     }
 }

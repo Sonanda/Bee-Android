@@ -116,6 +116,7 @@
                 android:layout_marginEnd="10sp">
 
                 <EditText
+                    android:id="@+id/token_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="15dp"
@@ -135,7 +136,8 @@
                     android:layout_gravity="center"
                     android:background="@drawable/orange_button"
                     style="@style/button_font_white"
-                    android:text="입력 하기" />
+                    android:text="입력 하기"
+                    android:onClick="@{() -> classroomLogin.onClickCheckButton()}"/>
 
             </LinearLayout>
 

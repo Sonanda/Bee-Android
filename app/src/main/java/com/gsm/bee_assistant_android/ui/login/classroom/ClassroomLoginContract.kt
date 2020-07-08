@@ -11,7 +11,13 @@ class ClassroomLoginContract {
 
         fun onClickSkipButton()
 
+        fun onClickCheckButton()
+
         fun showClassroomWebView(url: String)
+
+        fun showProgress()
+
+        fun hideProgress()
 
         fun finishActivity()
     }
@@ -19,5 +25,7 @@ class ClassroomLoginContract {
     interface Presenter : BasePresenter<View> {
 
         fun getClassroomUrl()
+
+        fun getClassroomToken(token: String)
     }
 }
