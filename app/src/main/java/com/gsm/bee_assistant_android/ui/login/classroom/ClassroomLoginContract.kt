@@ -7,14 +7,17 @@ class ClassroomLoginContract {
 
     interface View : BaseView<Presenter> {
 
-        var setSetVisibility: Boolean
-
         fun onClickClassroomButton()
 
         fun onClickSkipButton()
+
+        fun showClassroomWebView(url: String)
+
+        fun finishActivity()
     }
 
     interface Presenter : BasePresenter<View> {
 
+        fun getClassroomUrl()
     }
 }
