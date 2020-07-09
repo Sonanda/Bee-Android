@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="region">
+        <item>시/도</item>
         <item>서울특별시</item>
         <item>부산광역시</item>
         <item>인천광역시</item>
@@ -21,6 +22,7 @@
     </string-array>
 
     <string-array name="region_id">
+        <item> </item>
         <item>100260</item>
         <item>100267</item>
         <item>100269</item>
@@ -41,6 +43,7 @@
     </string-array>
 
     <string-array name="school_kind">
+        <item>학교 종류</item>
         <item>초등학교</item>
         <item>중학교</item>
         <item>고등학교</item>
@@ -50,6 +53,7 @@
     </string-array>
 
     <string-array name="school_kind_id">
+        <item> </item>
         <item>elem_list</item>
         <item>midd_list</item>
         <item>high_list</item>
@@ -59,6 +63,7 @@
     </string-array>
 
     <string-array name="school_type_id">
+        <item> </item>
         <item> </item>
         <item> </item>
         <item>100362</item>

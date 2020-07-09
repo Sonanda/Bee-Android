@@ -21,5 +21,7 @@ class SetSchoolContract {
         fun getIdValue(schoolKind: String, region: String)
 
         fun setSchoolName(schoolName: String)
+
+        fun checkSpinnerIndex(region: String, schoolKind: String, schoolName: String): Boolean
     }
 }

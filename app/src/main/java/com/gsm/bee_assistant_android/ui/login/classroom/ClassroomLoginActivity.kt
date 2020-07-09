@@ -58,7 +58,7 @@ class ClassroomLoginActivity : AppCompatActivity(), ClassroomLoginContract.View 
 
     override fun startActivity(activityName: Class<*>) { startActivity(Intent(this, activityName)) }
 
-    override fun onClickClassroomButton() = presenter.getClassroomUrl().apply { changeVisibility(true) }
+    override fun onClickClassroomButton() = presenter.getClassroomUrl()
 
     override fun onClickSkipButton() = startActivity(SetSchoolActivity::class.java).apply { presenter.setClassroomToken(ClassroomToken(access_token = "", refresh_token = "")); finish() }
 
@@ -71,7 +71,7 @@ class ClassroomLoginActivity : AppCompatActivity(), ClassroomLoginContract.View 
         // super.onBackPressed()
     }
 
-    private fun changeVisibility(bool: Boolean) {
+    override fun changeVisibility(bool: Boolean) {
 
         when(bool) {
             true -> {

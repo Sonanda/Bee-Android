@@ -35,7 +35,7 @@ class ClassroomLoginPresenter @Inject constructor(override val view: ClassroomLo
             OkHttpClient().newCall(req).enqueue(object : Callback{
 
             override fun onResponse(call: Call, response: Response) {
-                view.showClassroomWebView(response.body!!.string())
+                view.showClassroomWebView(response.body!!.string()).apply { view.changeVisibility(true) }
             }
 
             override fun onFailure(call: Call, e: IOException) {}

@@ -21,6 +21,8 @@ class ClassroomLoginContract {
         fun hideProgress()
 
         fun finishActivity()
+
+        fun changeVisibility(bool: Boolean)
     }
 
     interface Presenter : BasePresenter<View> {

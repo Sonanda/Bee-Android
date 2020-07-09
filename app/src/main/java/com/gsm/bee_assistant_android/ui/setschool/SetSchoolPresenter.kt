@@ -38,7 +38,7 @@ class SetSchoolPresenter @Inject constructor(override val view: SetSchoolContrac
     private val regionIdList: Array<String> = context.resources.getStringArray(R.array.region_id)
     private val schoolTypeIdList: Array<String> = context.resources.getStringArray(R.array.school_type_id)
 
-    override var schoolNameList: MutableList<String> = mutableListOf("")
+    override var schoolNameList: MutableList<String> = mutableListOf("학교 이름")
 
     override fun getSchoolInfo(schoolKind: String, region: String, schoolType: String) {
 
@@ -63,6 +63,7 @@ class SetSchoolPresenter @Inject constructor(override val view: SetSchoolContrac
                         //Log.d("schoolNameTest", schoolInfo.toString())
 
                         schoolNameList.clear()
+                        schoolNameList.add("학교 이름")
 
                         for(index in 0 until schoolInfo.dataSearch!!.content!!.size) {
                             schoolNameList.add(schoolInfo.dataSearch.content!![index].schoolName!!)
@@ -83,6 +84,12 @@ class SetSchoolPresenter @Inject constructor(override val view: SetSchoolContrac
         val schoolTypeId = schoolTypeIdList[schoolKindList.indexOf(schoolKind)]
 
         getSchoolInfo(schoolKindId, regionId, schoolTypeId)
+    }
+
+    override fun checkSpinnerIndex(region: String, schoolKind: String, schoolName: String): Boolean {
+        if(regionList.indexOf(region) != 0 && schoolKindList.indexOf(schoolKind) != 0 && schoolNameList.indexOf(schoolName) != 0) return true
+
+        return false
     }
 
     override fun setSchoolName(schoolName: String) { pref.setData(MyApplication.Key.SCHOOL_NAME.toString(), schoolName) }
