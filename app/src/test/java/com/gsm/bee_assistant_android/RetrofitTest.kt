@@ -51,9 +51,9 @@ class RetrofitTest {
 
         val call = provideSchoolNameRetrofit().getSchoolInfoTest(apiKey = BuildConfig.SCHOOL_API_KEY, schoolKind = "elem_list", region =  "100260", schoolType = "")
 
-        val res: Response<SchoolInfo> = call.execute()
+        //val res: Response<SchoolInfo> = call.execute()
 
-        Assert.assertEquals(res.body()!!.dataSearch!!.content!![0].schoolName.toString(), "강솔초등학교")
+        //Assert.assertEquals(res.body()!!.dataSearch!!.content!![0].schoolName.toString(), "강솔초등학교")
     }
 
     @Test
@@ -61,9 +61,9 @@ class RetrofitTest {
 
         val call = provideUserRetrofit().getUserTokenTest("itggood2420@gmail.com")
 
-        val res: Response<UserToken> = call.execute()
+        //val res: Response<UserToken> = call.execute()
 
-        println(res.body()!!.token)
+        //println(res.body()!!.token)
     }
 
     @Test
@@ -75,8 +75,8 @@ class RetrofitTest {
             refresh_token = "여기에 refresh_token"
         ))
 
-        val res: Response<UserToken> = call.execute()
+        //val res: Response<UserToken> = call.execute()
 
-        println(res.body()?.token)
+        //println(res.body()?.token)
     }
 }
