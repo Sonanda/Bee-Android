@@ -2,7 +2,7 @@ package com.gsm.bee_assistant_android.ui.login.classroom
 
 import com.gsm.bee_assistant_android.base.BasePresenter
 import com.gsm.bee_assistant_android.base.BaseView
-import com.gsm.bee_assistant_android.retrofit.domain.ClassroomToken
+import com.gsm.bee_assistant_android.retrofit.domain.classroom.ClassroomToken
 
 class ClassroomLoginContract {
 

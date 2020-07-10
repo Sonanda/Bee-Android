@@ -4,12 +4,11 @@ package com.gsm.bee_assistant_android.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.gsm.bee_assistant_android.retrofit.domain.ClassroomToken
+import com.gsm.bee_assistant_android.retrofit.domain.classroom.ClassroomToken
 import javax.inject.Inject
 
 class PreferenceManager @Inject constructor(context: Context) {
@@ -31,7 +30,9 @@ class PreferenceManager @Inject constructor(context: Context) {
 
     fun setData(key : String, value : String) = pref.edit().putString(key, value).commit()
 
-    fun getClassroomToken(key: String) : ClassroomToken = GsonBuilder().serializeNulls().create().fromJson(pref.getString(key, Gson().toJson(ClassroomToken())), ClassroomToken::class.java)
+    fun getClassroomToken(key: String) : ClassroomToken = GsonBuilder().serializeNulls().create().fromJson(pref.getString(key, Gson().toJson(
+        ClassroomToken()
+    )), ClassroomToken::class.java)
 
     fun setClassroomToken(key : String, classroomToken: ClassroomToken) = pref.edit().putString(key, GsonBuilder().create().toJson(classroomToken, ClassroomToken::class.java)).commit()
 }

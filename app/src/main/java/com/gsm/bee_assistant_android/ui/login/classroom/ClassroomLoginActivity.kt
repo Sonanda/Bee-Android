@@ -8,14 +8,10 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.databinding.ActivityClassroomLoginBinding
-import com.gsm.bee_assistant_android.retrofit.domain.ClassroomToken
+import com.gsm.bee_assistant_android.retrofit.domain.classroom.ClassroomToken
 import com.gsm.bee_assistant_android.ui.setschool.SetSchoolActivity
 import com.gsm.bee_assistant_android.utils.ProgressUtil
-import com.jakewharton.rxbinding4.view.clicks
 import dagger.android.AndroidInjection
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_classroom_login.*
 import javax.inject.Inject
 
@@ -64,24 +60,21 @@ class ClassroomLoginActivity : AppCompatActivity(), ClassroomLoginContract.View 
 
     override fun onClickCheckButton() = presenter.getClassroomToken(token_editText.text.toString())
 
-    override fun onBackPressed() {
-
-        changeVisibility(false)
-
-        // super.onBackPressed()
-    }
+    override fun onBackPressed() = changeVisibility(false)
 
     override fun changeVisibility(bool: Boolean) {
 
-        when(bool) {
-            true -> {
-                classroom_connect_layout.visibility = View.GONE
-                input_classroomToken_layout.visibility = View.VISIBLE
-            }
+        runOnUiThread {
+            when(bool) {
+                true -> {
+                    classroom_connect_layout.visibility = View.GONE
+                    input_classroomToken_layout.visibility = View.VISIBLE
+                }
 
-            false-> {
-                classroom_connect_layout.visibility = View.VISIBLE
-                input_classroomToken_layout.visibility = View.GONE
+                false-> {
+                    classroom_connect_layout.visibility = View.VISIBLE
+                    input_classroomToken_layout.visibility = View.GONE
+                }
             }
         }
     }

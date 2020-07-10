@@ -1,7 +1,7 @@
 package com.gsm.bee_assistant_android
 
-import com.gsm.bee_assistant_android.di.app.MyApplication
 import com.gsm.bee_assistant_android.retrofit.domain.SchoolInfo
+import com.gsm.bee_assistant_android.retrofit.domain.classroom.ClassroomTokenUpdate
 import com.gsm.bee_assistant_android.retrofit.domain.user.UserToken
 import com.gsm.bee_assistant_android.retrofit.network.SchoolInfoApi
 import com.gsm.bee_assistant_android.retrofit.network.UserApi
@@ -64,5 +64,19 @@ class RetrofitTest {
         val res: Response<UserToken> = call.execute()
 
         println(res.body()!!.token)
+    }
+
+    @Test
+    fun updateClassroomToken() {
+
+        val call = provideUserRetrofit().updateClassroomTokenTest(ClassroomTokenUpdate(
+            email = "s18017@gsm.hs.kr",
+            access_token = "여기에 access_token",
+            refresh_token = "여기에 refresh_token"
+        ))
+
+        val res: Response<UserToken> = call.execute()
+
+        println(res.body()?.token)
     }
 }
