@@ -32,12 +32,7 @@ class MainPresenter @Inject constructor(override val view: MainContract.View) : 
         pref.let {
             it.setData(MyApplication.Key.EMAIL.toString(), "")
             it.setData(MyApplication.Key.SCHOOL_NAME.toString(), "")
-            it.setClassroomToken(MyApplication.Key.CLASSROOM_TOKEN.toString(),
-                ClassroomToken(
-                    access_token = null,
-                    refresh_token = null
-                )
-            )
+            it.setClassroomToken(MyApplication.Key.CLASSROOM_TOKEN.toString(), ClassroomToken(access_token = null, refresh_token = null))
         }
 
         addDisposable(

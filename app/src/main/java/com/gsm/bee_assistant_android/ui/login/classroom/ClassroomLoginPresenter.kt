@@ -1,8 +1,8 @@
 package com.gsm.bee_assistant_android.ui.login.classroom
 
 import android.util.Log
-import com.gsm.bee_assistant_android.BuildConfig
 import com.gsm.bee_assistant_android.di.app.MyApplication
+import com.gsm.bee_assistant_android.retrofit.domain.classroom.ClassroomLink
 import com.gsm.bee_assistant_android.retrofit.domain.classroom.ClassroomToken
 import com.gsm.bee_assistant_android.retrofit.domain.classroom.ClassroomTokenUpdate
 import com.gsm.bee_assistant_android.retrofit.domain.user.UserToken
@@ -15,8 +15,9 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
-import okhttp3.*
-import java.io.IOException
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import javax.inject.Inject
 
 class ClassroomLoginPresenter @Inject constructor(override val view: ClassroomLoginContract.View) : ClassroomLoginContract.Presenter {
@@ -34,17 +35,16 @@ class ClassroomLoginPresenter @Inject constructor(override val view: ClassroomLo
 
     override fun getClassroomUrl() {
 
-        val req = Request.Builder()
-            .url(BuildConfig.BASE_URL + "classroom/getlink")
-            .build()
+        view.showProgress()
 
-            OkHttpClient().newCall(req).enqueue(object : Callback{
+        classroomRetrofit.getClassroomLink().enqueue(object : Callback<ClassroomLink> {
 
-            override fun onResponse(call: Call, response: Response) {
-                view.showClassroomWebView(response.body!!.string()).apply { view.changeVisibility(true) }
+            override fun onResponse(call: Call<ClassroomLink>, response: Response<ClassroomLink>) {
+                view.hideProgress()
+                view.showClassroomWebView(response.body()!!.link).apply { view.changeVisibility(true) }
             }
 
-            override fun onFailure(call: Call, e: IOException) {}
+            override fun onFailure(call: Call<ClassroomLink>, t: Throwable) { view.hideProgress() }
         })
     }
 
@@ -66,7 +66,7 @@ class ClassroomLoginPresenter @Inject constructor(override val view: ClassroomLo
 
                     override fun onComplete() {}
 
-                    override fun onError(e: Throwable) { Log.e("error", e.message.toString()) }
+                    override fun onError(e: Throwable) { Log.e("error", e.message.toString()); view.hideProgress() }
                 })
         )
     }
@@ -100,7 +100,7 @@ class ClassroomLoginPresenter @Inject constructor(override val view: ClassroomLo
                         }
                     }
 
-                    override fun onError(e: Throwable) { Log.e("error", e.message.toString()) }
+                    override fun onError(e: Throwable) { Log.e("error", e.message.toString()); view.hideProgress() }
                 })
         )
 

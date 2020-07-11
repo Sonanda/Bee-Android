@@ -30,9 +30,7 @@ class PreferenceManager @Inject constructor(context: Context) {
 
     fun setData(key : String, value : String) = pref.edit().putString(key, value).commit()
 
-    fun getClassroomToken(key: String) : ClassroomToken = GsonBuilder().serializeNulls().create().fromJson(pref.getString(key, Gson().toJson(
-        ClassroomToken()
-    )), ClassroomToken::class.java)
+    fun getClassroomToken(key: String) : ClassroomToken = GsonBuilder().serializeNulls().create().fromJson(pref.getString(key, Gson().toJson(ClassroomToken())), ClassroomToken::class.java)
 
     fun setClassroomToken(key : String, classroomToken: ClassroomToken) = pref.edit().putString(key, GsonBuilder().create().toJson(classroomToken, ClassroomToken::class.java)).commit()
 }
