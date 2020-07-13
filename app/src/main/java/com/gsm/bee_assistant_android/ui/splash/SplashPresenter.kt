@@ -21,16 +21,17 @@ class SplashPresenter @Inject constructor(override val view: SplashContract.View
     override fun checkUserInfo() {
 
         when {
-
-            pref.getClassroomToken(MyApplication.Key.CLASSROOM_TOKEN.toString()).access_token == null -> view.startActivity(ClassroomLoginActivity::class.java).apply { view.finishActivity() }
+            pref.getClassroomToken(MyApplication.Key.CLASSROOM_TOKEN.toString()).access_token == null
+                    && pref.getData(MyApplication.Key.EMAIL.toString()) != "" -> view.startActivity(ClassroomLoginActivity::class.java).apply { view.finishActivity() }
 
             pref.getData(MyApplication.Key.EMAIL.toString()) != "" -> view.startActivity(MainActivity::class.java).apply { view.finishActivity() }
 
-            else ->
+            else -> {
                 addDisposable(
                     Observable.interval(1000 * 3, TimeUnit.MILLISECONDS)
                         .subscribe { view.startActivity(GoogleLoginActivity::class.java).apply { view.finishActivity() } }
                 )
+            }
         }
     }
 
