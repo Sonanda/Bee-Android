@@ -25,7 +25,5 @@ class MainContract {
         fun getSchoolName(): String
 
         fun logout()
-
-        fun setSchoolInfo(schoolName: String)
     }
 }

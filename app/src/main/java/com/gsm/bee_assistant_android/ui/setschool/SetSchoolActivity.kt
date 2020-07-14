@@ -64,10 +64,7 @@ class SetSchoolActivity : BaseActivity(), SetSchoolContract.View, AdapterView.On
                     presenter.setSchoolInfo(region, schoolType, schoolName)
                 }
             }
-            R.id.skip_button -> {
-                startActivity(MainActivity::class.java)
-                finish()
-            }
+            R.id.skip_button -> presenter.setSchoolInfo("", "", "")
         }
     }
 

@@ -28,7 +28,7 @@ class SetSchoolDialogFragment : BaseDialogFragment(), SetSchoolDialogContract.Vi
 
     private lateinit var schoolNameList: MutableList<String>
 
-    var listener: (String) -> Unit = { _ -> }
+    var listener: (String) -> Unit = { inputSchoolName ->  presenter.checkSchoolName(inputSchoolName) }
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -53,9 +53,11 @@ class SetSchoolDialogFragment : BaseDialogFragment(), SetSchoolDialogContract.Vi
 
         confirmButton.setOnClickListener {
 
-            dismiss()
+            val inputSchoolName = schoolSearchTextView.text.toString()
 
-            listener.invoke(schoolSearchTextView.text.toString())
+            listener.invoke(inputSchoolName)
+
+            dismiss()
         }
 
         cancelButton.setOnClickListener { dismiss() }

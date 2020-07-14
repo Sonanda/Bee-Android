@@ -10,5 +10,9 @@ class SetSchoolDialogContract {
     interface Presenter : BasePresenter<View> {
 
         fun getSchoolName(): MutableList<String>
+
+        fun setSchoolInfo(region: String, schoolType: String, schoolName: String)
+
+        fun checkSchoolName(inputSchoolName: String): String
     }
 }

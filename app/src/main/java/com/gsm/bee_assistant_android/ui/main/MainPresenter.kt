@@ -38,10 +38,6 @@ class MainPresenter @Inject constructor(override val view: MainContract.View) : 
         )
     }
 
-    override fun setSchoolInfo(schoolName: String) {
-        // 여기에 학교 이름 변경 통신 작성
-    }
-
     override fun getUserEmail(): String = DataSingleton.getInstance()?._userInfo?.email!!
 
     override fun getSchoolName(): String = DataSingleton.getInstance()?._userInfo?.s_name!!

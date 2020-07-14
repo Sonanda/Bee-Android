@@ -70,12 +70,20 @@ class MainActivity : BaseActivity(), MainContract.View {
         dialog.let {
 
             it.listener = { schoolName ->
-                bindingNavigationHeader.userSchoolName.text = schoolName
-                presenter.setSchoolInfo(schoolName)
+                if(checkSchoolNameIsBlank(schoolName))
+                    bindingNavigationHeader.userSchoolName.text = schoolName
             }
 
             it.show(supportFragmentManager, "setSchoolDialog")
         }
+    }
+
+    private fun checkSchoolNameIsBlank(schoolName: String): Boolean {
+
+        if (schoolName != "")
+            return true
+
+        return false
     }
 
     override fun onBackPressed() {
