@@ -26,6 +26,6 @@ class MainContract {
 
         fun logout()
 
-        fun changeSchool(schoolName: String)
+        fun setSchoolInfo(schoolName: String)
     }
 }

@@ -110,6 +110,10 @@ class GoogleLoginPresenter @Inject constructor(override val view: GoogleLoginCon
         }
     }
 
+    override fun setSchoolInfo() {
+
+    }
+
     override fun googleSignIn(signInIntent: Intent) = view.showLogin(signInIntent)
 
     override fun addDisposable(disposable: Disposable) { compositeDisposable.add(disposable) }

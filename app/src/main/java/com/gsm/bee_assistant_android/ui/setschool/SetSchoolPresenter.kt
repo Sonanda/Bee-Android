@@ -6,7 +6,11 @@ import com.gsm.bee_assistant_android.BuildConfig
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.di.app.MyApplication
 import com.gsm.bee_assistant_android.retrofit.domain.school.SchoolInfo
+import com.gsm.bee_assistant_android.retrofit.domain.user.SchoolInfoUpdate
+import com.gsm.bee_assistant_android.retrofit.domain.user.UserToken
 import com.gsm.bee_assistant_android.retrofit.network.SchoolInfoApi
+import com.gsm.bee_assistant_android.retrofit.network.UserApi
+import com.gsm.bee_assistant_android.ui.main.MainActivity
 import com.gsm.bee_assistant_android.utils.DataSingleton
 import com.gsm.bee_assistant_android.utils.NetworkUtil
 import com.gsm.bee_assistant_android.utils.PreferenceManager
@@ -26,6 +30,9 @@ class SetSchoolPresenter @Inject constructor(override val view: SetSchoolContrac
 
     @Inject
     lateinit var schoolNameRetrofit: SchoolInfoApi
+
+    @Inject
+    lateinit var userRetrofit: UserApi
 
     @Inject
     lateinit var networkStatus: NetworkUtil
@@ -87,14 +94,44 @@ class SetSchoolPresenter @Inject constructor(override val view: SetSchoolContrac
         getSchoolInfo(schoolKindId, regionId, schoolTypeId)
     }
 
-    override fun checkSpinnerIndex(region: String, schoolKind: String, schoolName: String): Boolean {
-        if(regionList.indexOf(region) != 0 && schoolKindList.indexOf(schoolKind) != 0 && schoolNameList.indexOf(schoolName) != 0) return true
+    override fun checkSpinnerIndex(region: String, schoolType: String, schoolName: String): Boolean {
+        if(regionList.indexOf(region) != 0 && schoolKindList.indexOf(schoolType) != 0 && schoolNameList.indexOf(schoolName) != 0) return true
 
         return false
     }
 
     override fun setSchoolName(schoolName: String) {
         DataSingleton.getInstance()?._userInfo?.s_name = schoolName
+    }
+
+    override fun setSchoolInfo(region: String, schoolType: String, schoolName: String) {
+
+        view.showProgress()
+
+        val email = DataSingleton.getInstance()?._userInfo?.email!!
+
+        val schoolInfoUpdate = SchoolInfoUpdate(email, schoolType, region, schoolName)
+
+        addDisposable(
+            userRetrofit.updateSchoolInfo(schoolInfoUpdate)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(object: DisposableObserver<UserToken>(){
+                    override fun onNext(userToken: UserToken) {
+                        pref.setData(MyApplication.Key.USER_TOKEN.toString(), userToken.token)
+                    }
+
+                    override fun onComplete() {
+                        setSchoolName(schoolName).apply {
+                            view.hideProgress()
+                            view.startActivity(MainActivity::class.java)
+                            view.finishActivity()
+                        }
+                    }
+
+                    override fun onError(e: Throwable) {}
+                })
+        )
     }
 
     override fun addDisposable(disposable: Disposable) { compositeDisposable.add(disposable) }

@@ -38,7 +38,7 @@ class MainPresenter @Inject constructor(override val view: MainContract.View) : 
         )
     }
 
-    override fun changeSchool(schoolName: String) {
+    override fun setSchoolInfo(schoolName: String) {
         // 여기에 학교 이름 변경 통신 작성
     }
 

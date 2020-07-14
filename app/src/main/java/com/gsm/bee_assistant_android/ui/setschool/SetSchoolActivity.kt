@@ -55,10 +55,13 @@ class SetSchoolActivity : BaseActivity(), SetSchoolContract.View, AdapterView.On
     override fun onClick(view: View?) {
         when(view?.id) {
             R.id.setSchool_button -> {
-                if(presenter.checkSpinnerIndex(region_spinner.selectedItem.toString(), school_Kind_spinner.selectedItem.toString(), school_Name_spinner.selectedItem.toString())) {
-                    presenter.setSchoolName(school_Name_spinner.selectedItem.toString())
-                    startActivity(MainActivity::class.java)
-                    finish()
+
+                val region = region_spinner.selectedItem.toString()
+                val schoolType = school_Kind_spinner.selectedItem.toString()
+                val schoolName = school_Name_spinner.selectedItem.toString()
+
+                if(presenter.checkSpinnerIndex(region, schoolType, schoolName)) {
+                    presenter.setSchoolInfo(region, schoolType, schoolName)
                 }
             }
             R.id.skip_button -> {
@@ -83,6 +86,8 @@ class SetSchoolActivity : BaseActivity(), SetSchoolContract.View, AdapterView.On
     override fun hideProgress() {
 
     }
+
+    override fun finishActivity() = finish()
 
     override fun showToast(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 

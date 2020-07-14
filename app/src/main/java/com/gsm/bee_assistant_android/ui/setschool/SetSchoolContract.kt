@@ -8,6 +8,8 @@ class SetSchoolContract {
     interface View : BaseView<Presenter> {
 
         fun setProgressStatus(bool: Boolean)
+
+        fun finishActivity()
     }
 
     interface Presenter : BasePresenter<View> {
@@ -22,6 +24,8 @@ class SetSchoolContract {
 
         fun setSchoolName(schoolName: String)
 
-        fun checkSpinnerIndex(region: String, schoolKind: String, schoolName: String): Boolean
+        fun checkSpinnerIndex(region: String, schoolType: String, schoolName: String): Boolean
+
+        fun setSchoolInfo(region: String, schoolType: String, schoolName: String)
     }
 }

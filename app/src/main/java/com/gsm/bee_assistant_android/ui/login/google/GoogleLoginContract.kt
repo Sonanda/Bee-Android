@@ -24,5 +24,7 @@ class GoogleLoginContract {
         fun getUserInfo()
 
         fun checkUserInfoToChangeActivity()
+
+        fun setSchoolInfo()
     }
 }

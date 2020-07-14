@@ -3,8 +3,10 @@ package com.gsm.bee_assistant_android.ui.splash
 import com.gsm.bee_assistant_android.di.app.MyApplication
 import com.gsm.bee_assistant_android.retrofit.domain.user.UserInfo
 import com.gsm.bee_assistant_android.retrofit.network.UserApi
+import com.gsm.bee_assistant_android.ui.login.classroom.ClassroomLoginActivity
 import com.gsm.bee_assistant_android.ui.login.google.GoogleLoginActivity
 import com.gsm.bee_assistant_android.ui.main.MainActivity
+import com.gsm.bee_assistant_android.ui.setschool.SetSchoolActivity
 import com.gsm.bee_assistant_android.utils.DataSingleton
 import com.gsm.bee_assistant_android.utils.PreferenceManager
 import io.reactivex.Observable
@@ -47,14 +49,27 @@ class SplashPresenter @Inject constructor(override val view: SplashContract.View
 
                     override fun onNext(userInfo: UserInfo) { DataSingleton.getInstance()?._userInfo = userInfo }
 
-                    override fun onComplete() {
-                        view.startActivity(MainActivity::class.java)
-                        view.finishActivity()
-                    }
+                    override fun onComplete() = checkUserInfoToChangeActivity()
 
                     override fun onError(e: Throwable) {}
                 })
         )
+    }
+
+    override fun checkUserInfoToChangeActivity() {
+
+        val userInfo = DataSingleton.getInstance()?._userInfo!!
+
+        if (userInfo.access_token == "" || userInfo.access_token == null) {
+            view.startActivity(ClassroomLoginActivity::class.java)
+            view.finishActivity()
+        } else if (userInfo.s_name == "" || userInfo.s_name == null) {
+            view.startActivity(SetSchoolActivity::class.java)
+            view.finishActivity()
+        } else {
+            view.startActivity(MainActivity::class.java)
+            view.finishActivity()
+        }
     }
 
     override fun addDisposable(disposable: Disposable) { compositeDisposable.add(disposable) }

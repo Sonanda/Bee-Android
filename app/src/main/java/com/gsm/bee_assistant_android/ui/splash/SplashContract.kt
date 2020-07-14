@@ -15,5 +15,7 @@ class SplashContract {
         fun checkUserInfo()
 
         fun getUserInfo()
+
+        fun checkUserInfoToChangeActivity()
     }
 }
