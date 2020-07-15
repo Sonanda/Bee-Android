@@ -101,7 +101,7 @@ class GoogleLoginPresenter @Inject constructor(override val view: GoogleLoginCon
         if (userInfo.access_token == "" || userInfo.access_token == null) {
             view.startActivity(ClassroomLoginActivity::class.java)
             view.finishActivity()
-        } else if (userInfo.s_name == "" || userInfo.s_name == null) {
+        } else if (userInfo.name == "" || userInfo.name == null) {
             view.startActivity(SetSchoolActivity::class.java)
             view.finishActivity()
         } else {

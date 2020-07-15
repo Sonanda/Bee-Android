@@ -101,7 +101,7 @@ class SetSchoolPresenter @Inject constructor(override val view: SetSchoolContrac
     }
 
     override fun setSchoolName(schoolName: String) {
-        DataSingleton.getInstance()?._userInfo?.s_name = schoolName
+        DataSingleton.getInstance()?._userInfo?.name = schoolName
     }
 
     override fun setSchoolInfo(region: String, schoolType: String, schoolName: String) {

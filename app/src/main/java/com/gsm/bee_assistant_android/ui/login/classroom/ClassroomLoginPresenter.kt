@@ -104,7 +104,7 @@ class ClassroomLoginPresenter @Inject constructor(override val view: ClassroomLo
 
     override fun checkUserInfoToChangeActivity() {
 
-        val schoolName = DataSingleton.getInstance()?._userInfo?.s_name
+        val schoolName = DataSingleton.getInstance()?._userInfo?.name
 
         view.hideProgress().apply {
             if (schoolName == null || schoolName == "") {

@@ -1,5 +1,6 @@
 package com.gsm.bee_assistant_android.ui.splash
 
+import android.util.Log
 import com.gsm.bee_assistant_android.di.app.MyApplication
 import com.gsm.bee_assistant_android.retrofit.domain.user.UserInfo
 import com.gsm.bee_assistant_android.retrofit.network.UserApi
@@ -60,10 +61,12 @@ class SplashPresenter @Inject constructor(override val view: SplashContract.View
 
         val userInfo = DataSingleton.getInstance()?._userInfo!!
 
+        Log.d("userInfoTest", userInfo.toString())
+
         if (userInfo.access_token == "" || userInfo.access_token == null) {
             view.startActivity(ClassroomLoginActivity::class.java)
             view.finishActivity()
-        } else if (userInfo.s_name == "" || userInfo.s_name == null) {
+        } else if (userInfo.name == "" || userInfo.name == null) {
             view.startActivity(SetSchoolActivity::class.java)
             view.finishActivity()
         } else {

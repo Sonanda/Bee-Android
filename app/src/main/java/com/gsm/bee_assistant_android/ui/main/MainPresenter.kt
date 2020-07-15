@@ -40,7 +40,7 @@ class MainPresenter @Inject constructor(override val view: MainContract.View) : 
 
     override fun getUserEmail(): String = DataSingleton.getInstance()?._userInfo?.email!!
 
-    override fun getSchoolName(): String = DataSingleton.getInstance()?._userInfo?.s_name!!
+    override fun getSchoolName(): String = DataSingleton.getInstance()?._userInfo?.name!!
 
     override fun addDisposable(disposable: Disposable) { compositeDisposable.add(disposable) }
 

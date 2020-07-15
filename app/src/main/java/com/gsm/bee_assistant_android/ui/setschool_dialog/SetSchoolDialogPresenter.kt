@@ -40,6 +40,10 @@ class SetSchoolDialogPresenter @Inject constructor(override val view: SetSchoolD
 
     private val schoolNameList = mutableListOf<String>()
 
+    private val schoolTypeList = mutableListOf<String>()
+
+    private val regionList = mutableListOf<String>()
+
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     override fun getSchoolName(): MutableList<String> {
@@ -66,8 +70,23 @@ class SetSchoolDialogPresenter @Inject constructor(override val view: SetSchoolD
                         .subscribeWith(object : DisposableObserver<SchoolInfo>() {
                             override fun onNext(schoolInfo: SchoolInfo) {
 
-                                for(index in 0 until schoolInfo.dataSearch!!.content!!.size) {
-                                    schoolNameList.add(schoolInfo.dataSearch.content!![index].schoolName!!)
+                                val size = schoolInfo.dataSearch!!.content!!.size
+
+                                for(index in 0 until size) {
+
+                                    val content = schoolInfo.dataSearch.content!![index]
+
+                                    schoolNameList.add(content.schoolName!!)
+
+                                    regionList.add(content.region!!)
+
+                                    //Log.d("test", schoolNameList[index])
+
+                                    if (content.schoolGubun == null)
+                                        checkSchoolType(content.schoolName)
+                                    else
+                                        schoolTypeList.add(content.schoolGubun)
+
                                 }
                             }
 
@@ -81,13 +100,22 @@ class SetSchoolDialogPresenter @Inject constructor(override val view: SetSchoolD
         return schoolNameList
     }
 
-    override fun setSchoolInfo(region: String, schoolType: String, schoolName: String) {
+    private fun checkSchoolType(schoolName: String) {
+        when {
+            schoolName.contains("중학교") -> schoolTypeList.add("중학교")
+            schoolName.contains("초등학교") -> schoolTypeList.add("초등학교")
+        }
+    }
+
+    override fun setSchoolInfo(schoolName: String) {
 
         view.showProgress()
 
         val email = DataSingleton.getInstance()?._userInfo?.email!!
 
-        val schoolInfoUpdate = SchoolInfoUpdate(email, schoolType, region, schoolName)
+        val getRegionAndSchoolType = getRegionAndSchoolType(schoolName)
+
+        val schoolInfoUpdate = SchoolInfoUpdate(email, getRegionAndSchoolType.second, getRegionAndSchoolType.first, schoolName)
 
         addDisposable(
             userRetrofit.updateSchoolInfo(schoolInfoUpdate)
@@ -98,11 +126,19 @@ class SetSchoolDialogPresenter @Inject constructor(override val view: SetSchoolD
                         pref.setData(MyApplication.Key.USER_TOKEN.toString(), userToken.token)
                     }
 
-                    override fun onComplete() { view.hideProgress() }
+                    override fun onComplete() { view.hideProgress().apply { view.dismissDialog() } }
 
                     override fun onError(e: Throwable) {}
                 })
         )
+    }
+
+    private fun getRegionAndSchoolType(schoolName: String): Pair<String, String> {
+
+        val region = regionList[schoolNameList.indexOf(schoolName)]
+        val schoolType = schoolTypeList[schoolNameList.indexOf(schoolName)]
+
+        return Pair(region, schoolType)
     }
 
     override fun checkSchoolName(inputSchoolName: String): String {
@@ -110,7 +146,7 @@ class SetSchoolDialogPresenter @Inject constructor(override val view: SetSchoolD
         for (index in schoolNameList.indices) {
 
             if (schoolNameList[index].contains(inputSchoolName)) {
-                // 여기에 학교 정보 저장 구현
+
                 return schoolNameList[index]
             }
         }

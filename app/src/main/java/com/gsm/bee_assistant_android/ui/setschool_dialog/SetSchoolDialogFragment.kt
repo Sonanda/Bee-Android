@@ -57,16 +57,18 @@ class SetSchoolDialogFragment : BaseDialogFragment(), SetSchoolDialogContract.Vi
 
             listener.invoke(inputSchoolName)
 
-            dismiss()
+            presenter.setSchoolInfo(inputSchoolName)
         }
 
-        cancelButton.setOnClickListener { dismiss() }
+        cancelButton.setOnClickListener { dismissDialog() }
     }
 
     override fun onDestroy() {
         presenter.disposeDisposable()
         super.onDestroy()
     }
+
+    override fun dismissDialog() = dismiss()
 
     override fun init() {
 

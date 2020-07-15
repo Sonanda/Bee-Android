@@ -64,12 +64,12 @@ class MainActivity : BaseActivity(), MainContract.View {
 
     override fun onClickChangeSchoolButton() {
 
-        val dialog =
-            SetSchoolDialogFragment()
+        val dialog = SetSchoolDialogFragment()
 
         dialog.let {
 
             it.listener = { schoolName ->
+
                 if(checkSchoolNameIsBlank(schoolName))
                     bindingNavigationHeader.userSchoolName.text = schoolName
             }
