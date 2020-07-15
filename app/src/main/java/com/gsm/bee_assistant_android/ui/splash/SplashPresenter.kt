@@ -9,6 +9,7 @@ import com.gsm.bee_assistant_android.ui.login.google.GoogleLoginActivity
 import com.gsm.bee_assistant_android.ui.main.MainActivity
 import com.gsm.bee_assistant_android.ui.setschool.SetSchoolActivity
 import com.gsm.bee_assistant_android.utils.DataSingleton
+import com.gsm.bee_assistant_android.utils.NetworkUtil
 import com.gsm.bee_assistant_android.utils.PreferenceManager
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -26,6 +27,9 @@ class SplashPresenter @Inject constructor(override val view: SplashContract.View
 
     @Inject
     lateinit var userRetrofit: UserApi
+
+    @Inject
+    override lateinit var networkStatus: NetworkUtil
 
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
@@ -46,6 +50,15 @@ class SplashPresenter @Inject constructor(override val view: SplashContract.View
         addDisposable(
             userRetrofit.getUserInfo(pref.getData(MyApplication.Key.USER_TOKEN.toString())!!)
                 .subscribeOn(Schedulers.io())
+                .retryWhen {
+                    Observable.interval(3, TimeUnit.SECONDS)
+                        .retryUntil {
+                            if(networkStatus.networkInfo())
+                                return@retryUntil true
+
+                            false
+                        }
+                }
                 .subscribeWith(object: DisposableObserver<UserInfo>(){
 
                     override fun onNext(userInfo: UserInfo) { DataSingleton.getInstance()?._userInfo = userInfo }

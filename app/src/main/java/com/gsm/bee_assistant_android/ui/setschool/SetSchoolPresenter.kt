@@ -35,7 +35,7 @@ class SetSchoolPresenter @Inject constructor(override val view: SetSchoolContrac
     lateinit var userRetrofit: UserApi
 
     @Inject
-    lateinit var networkStatus: NetworkUtil
+    override lateinit var networkStatus: NetworkUtil
 
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
@@ -116,6 +116,15 @@ class SetSchoolPresenter @Inject constructor(override val view: SetSchoolContrac
             userRetrofit.updateSchoolInfo(schoolInfoUpdate)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
+                .retryWhen {
+                    Observable.interval(3, TimeUnit.SECONDS)
+                        .retryUntil {
+                            if(networkStatus.networkInfo())
+                                return@retryUntil true
+
+                            false
+                        }
+                }
                 .subscribeWith(object: DisposableObserver<UserToken>(){
                     override fun onNext(userToken: UserToken) {
                         pref.setData(MyApplication.Key.USER_TOKEN.toString(), userToken.token)

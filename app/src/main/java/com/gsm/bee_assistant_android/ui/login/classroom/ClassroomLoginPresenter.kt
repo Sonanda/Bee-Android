@@ -12,7 +12,9 @@ import com.gsm.bee_assistant_android.retrofit.network.UserApi
 import com.gsm.bee_assistant_android.ui.main.MainActivity
 import com.gsm.bee_assistant_android.ui.setschool.SetSchoolActivity
 import com.gsm.bee_assistant_android.utils.DataSingleton
+import com.gsm.bee_assistant_android.utils.NetworkUtil
 import com.gsm.bee_assistant_android.utils.PreferenceManager
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -21,6 +23,7 @@ import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class ClassroomLoginPresenter @Inject constructor(override val view: ClassroomLoginContract.View) : ClassroomLoginContract.Presenter {
@@ -30,6 +33,9 @@ class ClassroomLoginPresenter @Inject constructor(override val view: ClassroomLo
 
     @Inject
     lateinit var userRetrofit: UserApi
+
+    @Inject
+    override lateinit var networkStatus: NetworkUtil
 
     @Inject
     lateinit var pref: PreferenceManager
@@ -59,6 +65,15 @@ class ClassroomLoginPresenter @Inject constructor(override val view: ClassroomLo
             classroomRetrofit.getClassroomToken(token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .retryWhen {
+                    Observable.interval(3, TimeUnit.SECONDS)
+                        .retryUntil {
+                            if(networkStatus.networkInfo())
+                                return@retryUntil true
+
+                            false
+                        }
+                }
                 .subscribeWith(object: DisposableObserver<ClassroomToken>(){
                     override fun onNext(classroomToken: ClassroomToken) {
 
@@ -88,6 +103,15 @@ class ClassroomLoginPresenter @Inject constructor(override val view: ClassroomLo
             userRetrofit.updateClassroomToken(classroomTokenUpdate)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .retryWhen {
+                    Observable.interval(3, TimeUnit.SECONDS)
+                        .retryUntil {
+                            if(networkStatus.networkInfo())
+                                return@retryUntil true
+
+                            false
+                        }
+                }
                 .subscribeWith(object: DisposableObserver<UserToken>(){
 
                     override fun onNext(userToken: UserToken) {

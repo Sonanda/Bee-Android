@@ -13,6 +13,7 @@ import com.gsm.bee_assistant_android.ui.login.classroom.ClassroomLoginActivity
 import com.gsm.bee_assistant_android.ui.main.MainActivity
 import com.gsm.bee_assistant_android.ui.setschool.SetSchoolActivity
 import com.gsm.bee_assistant_android.utils.DataSingleton
+import com.gsm.bee_assistant_android.utils.NetworkUtil
 import com.gsm.bee_assistant_android.utils.PreferenceManager
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -20,6 +21,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class GoogleLoginPresenter @Inject constructor(override val view: GoogleLoginContract.View) : GoogleLoginContract.Presenter {
@@ -29,6 +31,9 @@ class GoogleLoginPresenter @Inject constructor(override val view: GoogleLoginCon
 
     @Inject
     lateinit var userRetrofit: UserApi
+
+    @Inject
+    override lateinit var networkStatus: NetworkUtil
 
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
@@ -64,6 +69,15 @@ class GoogleLoginPresenter @Inject constructor(override val view: GoogleLoginCon
             userRetrofit.getUserToken(email)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
+                .retryWhen {
+                    Observable.interval(3, TimeUnit.SECONDS)
+                        .retryUntil {
+                            if(networkStatus.networkInfo())
+                                return@retryUntil true
+
+                            false
+                        }
+                }
                 .subscribeWith(object: DisposableObserver<UserToken>(){
 
                     override fun onNext(userToken: UserToken) {
@@ -83,6 +97,15 @@ class GoogleLoginPresenter @Inject constructor(override val view: GoogleLoginCon
             userRetrofit.getUserInfo(pref.getData(MyApplication.Key.USER_TOKEN.toString())!!)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
+                .retryWhen {
+                    Observable.interval(3, TimeUnit.SECONDS)
+                        .retryUntil {
+                            if(networkStatus.networkInfo())
+                                return@retryUntil true
+
+                            false
+                        }
+                }
                 .subscribeWith(object: DisposableObserver<UserInfo>(){
 
                     override fun onNext(userInfo: UserInfo) { DataSingleton.getInstance()?._userInfo = userInfo }

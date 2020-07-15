@@ -31,7 +31,7 @@ class SetSchoolDialogPresenter @Inject constructor(override val view: SetSchoolD
     lateinit var userRetrofit: UserApi
 
     @Inject
-    lateinit var networkStatus: NetworkUtil
+    override lateinit var networkStatus: NetworkUtil
 
     @Inject
     lateinit var pref : PreferenceManager

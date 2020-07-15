@@ -5,6 +5,7 @@ import com.gsm.bee_assistant_android.di.app.MyApplication
 import com.gsm.bee_assistant_android.retrofit.domain.classroom.ClassroomToken
 import com.gsm.bee_assistant_android.ui.login.google.GoogleLoginActivity
 import com.gsm.bee_assistant_android.utils.DataSingleton
+import com.gsm.bee_assistant_android.utils.NetworkUtil
 import com.gsm.bee_assistant_android.utils.PreferenceManager
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -16,7 +17,11 @@ class MainPresenter @Inject constructor(override val view: MainContract.View) : 
     @Inject
     lateinit var pref: PreferenceManager
 
+    @Inject
+    override lateinit var networkStatus: NetworkUtil
+
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
+
     private var lastTimeBackPressed: Long = 0
 
     override fun backPressed() {
