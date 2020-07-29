@@ -2,14 +2,18 @@ package com.gsm.bee_assistant_android.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.base.BaseActivity
 import com.gsm.bee_assistant_android.databinding.ActivityMainBinding
 import com.gsm.bee_assistant_android.databinding.NavigationHeaderBinding
+import com.gsm.bee_assistant_android.ui.cafeteria.CafeteriaFragment
+import com.gsm.bee_assistant_android.ui.calendar.CalendarFragment
 import com.gsm.bee_assistant_android.ui.setschool_dialog.SetSchoolDialogFragment
 import dagger.android.AndroidInjection
 import io.reactivex.Observable
@@ -17,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.title_bar.*
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(), MainContract.View {
+class MainActivity : BaseActivity(), MainContract.View, BottomNavigationView.OnNavigationItemSelectedListener {
 
     @Inject
     override lateinit var presenter : MainContract.Presenter
@@ -43,6 +47,9 @@ class MainActivity : BaseActivity(), MainContract.View {
         show_navigation_bar_button.setOnClickListener(this)
         bindingNavigationHeader.userEmail.text = presenter.getUserEmail()
         bindingNavigationHeader.userSchoolName.text = presenter.getSchoolName()
+
+        supportFragmentManager.beginTransaction().add(R.id.frameLayout, MainFragment()).commit()
+        bottomNavigation.setOnNavigationItemSelectedListener(this)
     }
 
     override fun onDestroy() {
@@ -92,6 +99,28 @@ class MainActivity : BaseActivity(), MainContract.View {
             drawer_layout.isDrawerOpen(GravityCompat.END) -> drawer_layout.closeDrawers()
             else -> presenter.backPressed()
         }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId) {
+            R.id.page_home -> {
+                supportFragmentManager.beginTransaction().replace(R.id.frameLayout, MainFragment()).commitAllowingStateLoss()
+                return true
+            }
+
+            R.id.page_cafeteria -> {
+                supportFragmentManager.beginTransaction().replace(R.id.frameLayout, CafeteriaFragment()).commitAllowingStateLoss()
+                return true
+            }
+
+            R.id.page_calendar -> {
+                supportFragmentManager.beginTransaction().replace(R.id.frameLayout, CalendarFragment()).commitAllowingStateLoss()
+                return true
+            }
+        }
+
+        return false
     }
 
     override fun showProgress() {
