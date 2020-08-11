@@ -5,8 +5,6 @@ import com.gsm.bee_assistant_android.di.app.MyApplication
 import com.gsm.bee_assistant_android.retrofit.domain.classroom.ClassroomLink
 import com.gsm.bee_assistant_android.retrofit.domain.classroom.ClassroomToken
 import com.gsm.bee_assistant_android.retrofit.domain.classroom.ClassroomTokenUpdate
-import com.gsm.bee_assistant_android.retrofit.domain.user.UserInfo
-import com.gsm.bee_assistant_android.retrofit.domain.user.UserToken
 import com.gsm.bee_assistant_android.retrofit.network.ClassroomApi
 import com.gsm.bee_assistant_android.retrofit.network.UserApi
 import com.gsm.bee_assistant_android.ui.main.MainActivity
@@ -14,11 +12,10 @@ import com.gsm.bee_assistant_android.ui.setschool.SetSchoolActivity
 import com.gsm.bee_assistant_android.utils.DataSingleton
 import com.gsm.bee_assistant_android.utils.NetworkUtil
 import com.gsm.bee_assistant_android.utils.PreferenceManager
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
@@ -66,7 +63,7 @@ class ClassroomLoginPresenter @Inject constructor(override val view: ClassroomLo
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .retryWhen {
-                    Observable.interval(3, TimeUnit.SECONDS)
+                    Flowable.interval(3, TimeUnit.SECONDS)
                         .retryUntil {
                             if(networkStatus.networkInfo())
                                 return@retryUntil true
@@ -74,18 +71,17 @@ class ClassroomLoginPresenter @Inject constructor(override val view: ClassroomLo
                             false
                         }
                 }
-                .subscribeWith(object: DisposableObserver<ClassroomToken>(){
-                    override fun onNext(classroomToken: ClassroomToken) {
+                .subscribe(
+                    {
+                        setClassroomToken(it)
 
-                        setClassroomToken(classroomToken)
-
-                        Log.d("classroomToken", classroomToken.access_token.toString())
+                        Log.d("classroomToken", it.access_token.toString())
+                    },
+                    {
+                        Log.e("error", it.message.toString())
+                        view.hideProgress()
                     }
-
-                    override fun onComplete() {}
-
-                    override fun onError(e: Throwable) { Log.e("error", e.message.toString()); view.hideProgress() }
-                })
+                )
         )
     }
 
@@ -104,7 +100,7 @@ class ClassroomLoginPresenter @Inject constructor(override val view: ClassroomLo
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .retryWhen {
-                    Observable.interval(3, TimeUnit.SECONDS)
+                    Flowable.interval(3, TimeUnit.SECONDS)
                         .retryUntil {
                             if(networkStatus.networkInfo())
                                 return@retryUntil true
@@ -112,17 +108,19 @@ class ClassroomLoginPresenter @Inject constructor(override val view: ClassroomLo
                             false
                         }
                 }
-                .subscribeWith(object: DisposableObserver<UserToken>(){
+                .subscribe(
+                    {
+                        Log.d("userToken", it.token)
 
-                    override fun onNext(userToken: UserToken) {
-                        pref.setData(MyApplication.Key.USER_TOKEN.toString(), userToken.token)
-                        Log.d("userToken", userToken.token)
+                        pref.setData(MyApplication.Key.USER_TOKEN.toString(), it.token).apply {
+                            checkUserInfoToChangeActivity()
+                        }
+                    },
+                    {
+                        Log.e("error", it.message.toString())
+                        view.hideProgress()
                     }
-
-                    override fun onComplete() = checkUserInfoToChangeActivity()
-
-                    override fun onError(e: Throwable) { Log.e("error", e.message.toString()); view.hideProgress() }
-                })
+                )
         )
     }
 

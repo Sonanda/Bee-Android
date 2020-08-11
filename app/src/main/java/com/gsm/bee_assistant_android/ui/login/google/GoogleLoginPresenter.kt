@@ -6,8 +6,6 @@ import com.google.android.gms.auth.api.Auth
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.gsm.bee_assistant_android.di.app.MyApplication
-import com.gsm.bee_assistant_android.retrofit.domain.user.UserInfo
-import com.gsm.bee_assistant_android.retrofit.domain.user.UserToken
 import com.gsm.bee_assistant_android.retrofit.network.UserApi
 import com.gsm.bee_assistant_android.ui.login.classroom.ClassroomLoginActivity
 import com.gsm.bee_assistant_android.ui.main.MainActivity
@@ -15,11 +13,11 @@ import com.gsm.bee_assistant_android.ui.setschool.SetSchoolActivity
 import com.gsm.bee_assistant_android.utils.DataSingleton
 import com.gsm.bee_assistant_android.utils.NetworkUtil
 import com.gsm.bee_assistant_android.utils.PreferenceManager
+import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -70,7 +68,7 @@ class GoogleLoginPresenter @Inject constructor(override val view: GoogleLoginCon
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .retryWhen {
-                    Observable.interval(3, TimeUnit.SECONDS)
+                    Flowable.interval(3, TimeUnit.SECONDS)
                         .retryUntil {
                             if(networkStatus.networkInfo())
                                 return@retryUntil true
@@ -78,17 +76,14 @@ class GoogleLoginPresenter @Inject constructor(override val view: GoogleLoginCon
                             false
                         }
                 }
-                .subscribeWith(object: DisposableObserver<UserToken>(){
+                .subscribe(
+                    {
+                        Log.i("userToken", it.token)
+                        pref.setData(MyApplication.Key.USER_TOKEN.toString(), it.token)
 
-                    override fun onNext(userToken: UserToken) {
-                        Log.i("userToken", userToken.token)
-                        pref.setData(MyApplication.Key.USER_TOKEN.toString(), userToken.token)
-                    }
-
-                    override fun onComplete() = getUserInfo()
-
-                    override fun onError(e: Throwable) {}
-                })
+                        getUserInfo()
+                    }, {}
+                )
         )
     }
 
@@ -98,7 +93,7 @@ class GoogleLoginPresenter @Inject constructor(override val view: GoogleLoginCon
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .retryWhen {
-                    Observable.interval(3, TimeUnit.SECONDS)
+                    Flowable.interval(3, TimeUnit.SECONDS)
                         .retryUntil {
                             if(networkStatus.networkInfo())
                                 return@retryUntil true
@@ -106,14 +101,13 @@ class GoogleLoginPresenter @Inject constructor(override val view: GoogleLoginCon
                             false
                         }
                 }
-                .subscribeWith(object: DisposableObserver<UserInfo>(){
+                .subscribe(
+                    {
+                        DataSingleton.getInstance()?._userInfo = it
 
-                    override fun onNext(userInfo: UserInfo) { DataSingleton.getInstance()?._userInfo = userInfo }
-
-                    override fun onComplete() { view.hideProgress().apply { checkUserInfoToChangeActivity() } }
-
-                    override fun onError(e: Throwable) {}
-                })
+                        view.hideProgress().apply { checkUserInfoToChangeActivity() }
+                    }, {}
+                )
         )
     }
 

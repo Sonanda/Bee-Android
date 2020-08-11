@@ -2,7 +2,6 @@ package com.gsm.bee_assistant_android.ui.splash
 
 import android.util.Log
 import com.gsm.bee_assistant_android.di.app.MyApplication
-import com.gsm.bee_assistant_android.retrofit.domain.user.UserInfo
 import com.gsm.bee_assistant_android.retrofit.network.UserApi
 import com.gsm.bee_assistant_android.ui.login.classroom.ClassroomLoginActivity
 import com.gsm.bee_assistant_android.ui.login.google.GoogleLoginActivity
@@ -11,11 +10,10 @@ import com.gsm.bee_assistant_android.ui.setschool.SetSchoolActivity
 import com.gsm.bee_assistant_android.utils.DataSingleton
 import com.gsm.bee_assistant_android.utils.NetworkUtil
 import com.gsm.bee_assistant_android.utils.PreferenceManager
+import io.reactivex.Flowable
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -51,7 +49,7 @@ class SplashPresenter @Inject constructor(override val view: SplashContract.View
             userRetrofit.getUserInfo(pref.getData(MyApplication.Key.USER_TOKEN.toString())!!)
                 .subscribeOn(Schedulers.io())
                 .retryWhen {
-                    Observable.interval(3, TimeUnit.SECONDS)
+                    Flowable.interval(3, TimeUnit.SECONDS)
                         .retryUntil {
                             if(networkStatus.networkInfo())
                                 return@retryUntil true
@@ -59,14 +57,15 @@ class SplashPresenter @Inject constructor(override val view: SplashContract.View
                             false
                         }
                 }
-                .subscribeWith(object: DisposableObserver<UserInfo>(){
+                .subscribe(
+                    {
+                        Log.d("userInfoTest1", it.toString())
 
-                    override fun onNext(userInfo: UserInfo) { DataSingleton.getInstance()?._userInfo = userInfo; Log.d("userInfoTest1", userInfo.toString()) }
+                        DataSingleton.getInstance()?._userInfo = it
 
-                    override fun onComplete() = checkUserInfoToChangeActivity()
-
-                    override fun onError(e: Throwable) {}
-                })
+                        checkUserInfoToChangeActivity()
+                    }, {}
+                )
         )
     }
 

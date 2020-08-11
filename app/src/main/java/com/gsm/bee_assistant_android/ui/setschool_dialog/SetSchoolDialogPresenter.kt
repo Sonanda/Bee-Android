@@ -5,19 +5,17 @@ import android.util.Log
 import com.gsm.bee_assistant_android.BuildConfig
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.di.app.MyApplication
-import com.gsm.bee_assistant_android.retrofit.domain.school.SchoolInfo
 import com.gsm.bee_assistant_android.retrofit.domain.user.SchoolInfoUpdate
-import com.gsm.bee_assistant_android.retrofit.domain.user.UserToken
 import com.gsm.bee_assistant_android.retrofit.network.SchoolInfoApi
 import com.gsm.bee_assistant_android.retrofit.network.UserApi
 import com.gsm.bee_assistant_android.utils.DataSingleton
 import com.gsm.bee_assistant_android.utils.NetworkUtil
 import com.gsm.bee_assistant_android.utils.PreferenceManager
+import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -59,7 +57,7 @@ class SetSchoolDialogPresenter @Inject constructor(override val view: SetSchoolD
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
                         .retryWhen {
-                            Observable.interval(3, TimeUnit.SECONDS)
+                            Flowable.interval(3, TimeUnit.SECONDS)
                                 .retryUntil {
                                     if(networkStatus.networkInfo())
                                         return@retryUntil true
@@ -67,9 +65,8 @@ class SetSchoolDialogPresenter @Inject constructor(override val view: SetSchoolD
                                     false
                                 }
                         }
-                        .subscribeWith(object : DisposableObserver<SchoolInfo>() {
-                            override fun onNext(schoolInfo: SchoolInfo) {
-
+                        .subscribe(
+                            { schoolInfo ->
                                 val size = schoolInfo.dataSearch!!.content!!.size
 
                                 for(index in 0 until size) {
@@ -86,14 +83,12 @@ class SetSchoolDialogPresenter @Inject constructor(override val view: SetSchoolD
                                         checkSchoolType(content.schoolName)
                                     else
                                         schoolTypeList.add(content.schoolGubun)
-
                                 }
-                            }
 
-                            override fun onComplete() { if (it < 2) view.hideProgress() }
-
-                            override fun onError(e: Throwable) { Log.d("error", e.message.toString()) }
-                        })
+                                if (it < 2) view.hideProgress()
+                            },
+                            { error -> Log.d("error", error.message.toString()) }
+                        )
                 }
         )
 
@@ -121,15 +116,14 @@ class SetSchoolDialogPresenter @Inject constructor(override val view: SetSchoolD
             userRetrofit.updateSchoolInfo(schoolInfoUpdate)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribeWith(object: DisposableObserver<UserToken>(){
-                    override fun onNext(userToken: UserToken) {
-                        pref.setData(MyApplication.Key.USER_TOKEN.toString(), userToken.token)
-                    }
-
-                    override fun onComplete() { view.hideProgress().apply { view.dismissDialog() } }
-
-                    override fun onError(e: Throwable) {}
-                })
+                .subscribe(
+                    {
+                        pref.setData(MyApplication.Key.USER_TOKEN.toString(), it.token).apply {
+                            view.hideProgress()
+                            view.dismissDialog()
+                        }
+                    }, {}
+                )
         )
     }
 

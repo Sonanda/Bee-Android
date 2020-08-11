@@ -2,7 +2,7 @@ package com.gsm.bee_assistant_android.retrofit.network
 
 import com.gsm.bee_assistant_android.retrofit.domain.classroom.ClassroomLink
 import com.gsm.bee_assistant_android.retrofit.domain.classroom.ClassroomToken
-import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -13,5 +13,5 @@ interface ClassroomApi {
 
     @FormUrlEncoded
     @POST("classroom")
-    fun getClassroomToken(@Field("code") code: String): Observable<ClassroomToken>
+    fun getClassroomToken(@Field("code") code: String): Single<ClassroomToken>
 }

@@ -5,20 +5,17 @@ import android.util.Log
 import com.gsm.bee_assistant_android.BuildConfig
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.di.app.MyApplication
-import com.gsm.bee_assistant_android.retrofit.domain.school.SchoolInfo
 import com.gsm.bee_assistant_android.retrofit.domain.user.SchoolInfoUpdate
-import com.gsm.bee_assistant_android.retrofit.domain.user.UserToken
 import com.gsm.bee_assistant_android.retrofit.network.SchoolInfoApi
 import com.gsm.bee_assistant_android.retrofit.network.UserApi
 import com.gsm.bee_assistant_android.ui.main.MainActivity
 import com.gsm.bee_assistant_android.utils.DataSingleton
 import com.gsm.bee_assistant_android.utils.NetworkUtil
 import com.gsm.bee_assistant_android.utils.PreferenceManager
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -57,7 +54,7 @@ class SetSchoolPresenter @Inject constructor(override val view: SetSchoolContrac
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .retryWhen {
-                    Observable.interval(3, TimeUnit.SECONDS)
+                    Flowable.interval(3, TimeUnit.SECONDS)
                         .retryUntil {
                             if(networkStatus.networkInfo())
                                 return@retryUntil true
@@ -65,25 +62,23 @@ class SetSchoolPresenter @Inject constructor(override val view: SetSchoolContrac
                             false
                         }
                 }
-                .subscribeWith(object : DisposableObserver<SchoolInfo>() {
-                    override fun onNext(schoolInfo: SchoolInfo) {
-
-                        //Log.d("schoolNameTest", schoolInfo.toString())
+                .subscribe(
+                    {
+                        //Log.d("schoolNameTest", it.toString())
 
                         schoolNameList.clear()
                         schoolNameList.add("학교 이름")
 
-                        val content = schoolInfo.dataSearch!!.content!!
+                        val content = it.dataSearch!!.content!!
 
                         for(index in 0 until content.size) {
                             schoolNameList.add(content[index].schoolName!!)
                         }
-                    }
 
-                    override fun onComplete() { view.setProgressStatus(false) }
-
-                    override fun onError(e: Throwable) { Log.d("error", e.message.toString()) }
-                })
+                        view.setProgressStatus(false)
+                    },
+                    { Log.d("error", it.message.toString()) }
+                )
         )
     }
 
@@ -120,7 +115,7 @@ class SetSchoolPresenter @Inject constructor(override val view: SetSchoolContrac
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .retryWhen {
-                    Observable.interval(3, TimeUnit.SECONDS)
+                    Flowable.interval(3, TimeUnit.SECONDS)
                         .retryUntil {
                             if(networkStatus.networkInfo())
                                 return@retryUntil true
@@ -128,21 +123,17 @@ class SetSchoolPresenter @Inject constructor(override val view: SetSchoolContrac
                             false
                         }
                 }
-                .subscribeWith(object: DisposableObserver<UserToken>(){
-                    override fun onNext(userToken: UserToken) {
-                        pref.setData(MyApplication.Key.USER_TOKEN.toString(), userToken.token)
-                    }
+                .subscribe(
+                    {
+                        pref.setData(MyApplication.Key.USER_TOKEN.toString(), it.token)
 
-                    override fun onComplete() {
                         setSchoolName(schoolName).apply {
                             view.hideProgress()
                             view.startActivity(MainActivity::class.java)
                             view.finishActivity()
                         }
-                    }
-
-                    override fun onError(e: Throwable) {}
-                })
+                    }, {}
+                )
         )
     }
 

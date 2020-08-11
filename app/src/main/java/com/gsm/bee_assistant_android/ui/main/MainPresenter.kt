@@ -2,7 +2,6 @@ package com.gsm.bee_assistant_android.ui.main
 
 import com.google.firebase.auth.FirebaseAuth
 import com.gsm.bee_assistant_android.di.app.MyApplication
-import com.gsm.bee_assistant_android.retrofit.domain.classroom.ClassroomToken
 import com.gsm.bee_assistant_android.ui.login.google.GoogleLoginActivity
 import com.gsm.bee_assistant_android.utils.DataSingleton
 import com.gsm.bee_assistant_android.utils.NetworkUtil

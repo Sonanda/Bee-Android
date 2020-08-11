@@ -1,7 +1,7 @@
 package com.gsm.bee_assistant_android.retrofit.network
 
 import com.gsm.bee_assistant_android.retrofit.domain.school.SchoolInfo
-import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -17,7 +17,7 @@ interface SchoolInfoApi {
         @Query("gubun") schoolKind: String,
         @Query("region") region: String,
         @Query("sch1") schoolType: String
-    ) : Observable<SchoolInfo>
+    ) : Single<SchoolInfo>
 
     @GET("getOpenApi")
     fun getSchoolInfoTest(
@@ -38,5 +38,5 @@ interface SchoolInfoApi {
         @Query("contentType") contentType: String = "json",
         @Query("gubun") schoolKind: String,
         @Query("perPage") perPage: String = ""
-    ): Observable<SchoolInfo>
+    ): Single<SchoolInfo>
 }
