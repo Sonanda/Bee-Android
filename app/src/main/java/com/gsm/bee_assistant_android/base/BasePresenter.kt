@@ -1,6 +1,5 @@
 package com.gsm.bee_assistant_android.base
 
-import com.gsm.bee_assistant_android.utils.NetworkUtil
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 

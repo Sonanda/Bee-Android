@@ -2,24 +2,17 @@ package com.gsm.bee_assistant_android.ui.setschool_dialog
 
 import android.content.Context
 import android.util.Log
-import com.gsm.bee_assistant_android.BuildConfig
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.di.app.MyApplication
 import com.gsm.bee_assistant_android.retrofit.domain.user.SchoolInfoUpdate
 import com.gsm.bee_assistant_android.retrofit.network.SchoolInfoApi
-import com.gsm.bee_assistant_android.retrofit.network.UserApi
 import com.gsm.bee_assistant_android.retrofit.repository.SchoolRepository
 import com.gsm.bee_assistant_android.retrofit.repository.UserRepository
 import com.gsm.bee_assistant_android.utils.DataSingleton
-import com.gsm.bee_assistant_android.utils.NetworkUtil
 import com.gsm.bee_assistant_android.utils.PreferenceManager
-import io.reactivex.Flowable
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class SetSchoolDialogPresenter @Inject constructor(

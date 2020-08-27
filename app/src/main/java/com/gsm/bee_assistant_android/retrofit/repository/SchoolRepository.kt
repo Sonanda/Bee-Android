@@ -7,7 +7,6 @@ import com.gsm.bee_assistant_android.retrofit.network.SchoolApi
 import com.gsm.bee_assistant_android.retrofit.network.SchoolInfoApi
 import com.gsm.bee_assistant_android.utils.NetworkUtil
 import io.reactivex.Flowable
-import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -48,12 +47,12 @@ class SchoolRepository @Inject constructor(
                     }
             }
 
-    fun getMeal(type: String, region: String, schoolName: String, year: Int, month: Int, day: Int): Observable<Meal> =
+    fun getMeal(type: String, region: String, schoolName: String, year: Int, month: Int, day: Int): Single<Meal> =
         schoolApi.getMeal(type, region, schoolName, year, month, day)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .retryWhen {
-                Observable.interval(3, TimeUnit.SECONDS)
+                Flowable.interval(3, TimeUnit.SECONDS)
                     .retryUntil {
                         if(networkStatus.networkInfo())
                             return@retryUntil true

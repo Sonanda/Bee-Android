@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.base.BaseActivity
 import com.gsm.bee_assistant_android.databinding.ActivitySetSchoolBinding
-import com.gsm.bee_assistant_android.ui.main.MainActivity
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_set_school.*
 import javax.inject.Inject

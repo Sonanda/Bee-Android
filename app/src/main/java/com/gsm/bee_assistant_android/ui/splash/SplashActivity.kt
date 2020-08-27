@@ -7,7 +7,6 @@ import androidx.databinding.DataBindingUtil
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.base.BaseActivity
 import com.gsm.bee_assistant_android.databinding.ActivitySplashBinding
-import com.gsm.bee_assistant_android.ui.splash.SplashContract
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 

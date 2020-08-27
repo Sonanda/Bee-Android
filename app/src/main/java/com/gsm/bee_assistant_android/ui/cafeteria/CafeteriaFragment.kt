@@ -6,10 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.widget.SimpleAdapter
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.DialogFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.base.BaseFragment
