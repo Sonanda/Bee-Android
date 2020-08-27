@@ -1,6 +1,7 @@
 package com.gsm.bee_assistant_android.di.module
 
 import com.gsm.bee_assistant_android.retrofit.network.ClassroomApi
+import com.gsm.bee_assistant_android.retrofit.network.SchoolApi
 import com.gsm.bee_assistant_android.retrofit.network.SchoolInfoApi
 import com.gsm.bee_assistant_android.retrofit.network.UserApi
 import com.gsm.bee_assistant_android.retrofit.repository.ClassroomRepository
@@ -24,5 +25,5 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideSchoolRepository(schoolInfoApi: SchoolInfoApi, networkStatus: NetworkUtil) = SchoolRepository(schoolInfoApi, networkStatus)
+    fun provideSchoolRepository(schoolInfoApi: SchoolInfoApi, schoolApi: SchoolApi, networkStatus: NetworkUtil) = SchoolRepository(schoolInfoApi, schoolApi, networkStatus)
 }

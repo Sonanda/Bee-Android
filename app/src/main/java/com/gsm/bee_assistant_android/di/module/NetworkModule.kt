@@ -1,17 +1,12 @@
 package com.gsm.bee_assistant_android.di.module
 
 import com.gsm.bee_assistant_android.BuildConfig
-import com.gsm.bee_assistant_android.di.app.MyApplication
-import com.gsm.bee_assistant_android.retrofit.domain.user.UserInfo
 import com.gsm.bee_assistant_android.retrofit.network.ClassroomApi
+import com.gsm.bee_assistant_android.retrofit.network.SchoolApi
 import com.gsm.bee_assistant_android.retrofit.network.SchoolInfoApi
 import com.gsm.bee_assistant_android.retrofit.network.UserApi
-import dagger.Component
 import dagger.Module
 import dagger.Provides
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.observers.DisposableObserver
-import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -44,6 +39,20 @@ class NetworkModule {
             .build()
 
         return retrofit.create(SchoolInfoApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSchoolRetrofit() : SchoolApi {
+
+        val retrofit = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(provideOkHttpClient())
+            .baseUrl(BuildConfig.BASE_URL)
+            .build()
+
+        return retrofit.create(SchoolApi::class.java)
     }
 
     @Provides
