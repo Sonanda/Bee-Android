@@ -1,8 +1,6 @@
 package com.gsm.bee_assistant_android.ui.calendar
 
-import com.gsm.bee_assistant_android.retrofit.domain.school.Schedule
 import com.gsm.bee_assistant_android.retrofit.repository.SchoolRepository
-import com.gsm.bee_assistant_android.utils.DataSingleton
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
@@ -28,26 +26,21 @@ class CalendarPresenter @Inject constructor(
                     else
                         listOf(it.today)
                 }
+                .map {
+                    val scheduleArrayList = arrayListOf<String>()
+
+                    for (i in it.indices)
+                        scheduleArrayList.add(it[i])
+
+                    return@map scheduleArrayList
+                }
                 .subscribe(
                     {
-                        setSchedule(it).let { scheduleList ->
-                            view.showSchedule(scheduleList)
-                            view.hideProgress()
-                        }
+                        view.showSchedule(it)
+                        view.hideProgress()
                     }, {}
                 )
         )
-    }
-
-
-    override fun setSchedule(scheduleList: List<String>): ArrayList<String> {
-
-        val scheduleArrayList = arrayListOf<String>()
-
-        for (i in scheduleList.indices)
-            scheduleArrayList.add(scheduleList[i])
-
-        return scheduleArrayList
     }
 
     override fun addDisposable(disposable: Disposable) { compositeDisposable.add(disposable) }

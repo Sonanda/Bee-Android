@@ -11,7 +11,6 @@ import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.base.BaseFragment
 import com.gsm.bee_assistant_android.databinding.FragmentCalendarBinding
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.activity_set_school.*
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import kotlinx.android.synthetic.main.fragment_calendar.loading_progress
 import javax.inject.Inject

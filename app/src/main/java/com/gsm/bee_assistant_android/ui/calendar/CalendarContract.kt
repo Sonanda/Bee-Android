@@ -12,7 +12,5 @@ class CalendarContract {
     interface Presenter: BasePresenter<View> {
 
         fun getSchedule(year: Int, month: Int, day: Int)
-
-        fun setSchedule(scheduleList: List<String>): ArrayList<String>
     }
 }
