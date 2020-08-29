@@ -55,9 +55,9 @@ class CafeteriaFragment : BaseFragment(), CafeteriaContract.View {
 
     override fun init() {
 
-        Log.i("data", calendar.date.toString())
+        Log.i("data", cafeteria__calendarView.date.toString())
 
-        calendar.setOnDateChangeListener { _, year, month, dayOfMonth -> presenter.getMeal(year, month + 1, dayOfMonth) }
+        cafeteria__calendarView.setOnDateChangeListener { _, year, month, dayOfMonth -> presenter.getMeal(year, month + 1, dayOfMonth) }
     }
 
     override fun showMeal(mealList: ArrayList<String>) {

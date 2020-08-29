@@ -14,7 +14,7 @@
         android:orientation="vertical" >
 
         <CalendarView
-            android:id="@+id/calendar"
+            android:id="@+id/cafeteria__calendarView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

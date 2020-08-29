@@ -2,9 +2,11 @@ package com.gsm.bee_assistant_android.retrofit.repository
 
 import com.gsm.bee_assistant_android.BuildConfig
 import com.gsm.bee_assistant_android.retrofit.domain.school.Meal
+import com.gsm.bee_assistant_android.retrofit.domain.school.Schedule
 import com.gsm.bee_assistant_android.retrofit.domain.school.SchoolInfo
 import com.gsm.bee_assistant_android.retrofit.network.SchoolApi
 import com.gsm.bee_assistant_android.retrofit.network.SchoolInfoApi
+import com.gsm.bee_assistant_android.utils.DataSingleton
 import com.gsm.bee_assistant_android.utils.NetworkUtil
 import io.reactivex.Flowable
 import io.reactivex.Single
@@ -18,6 +20,8 @@ class SchoolRepository @Inject constructor(
     private val schoolApi: SchoolApi,
     private val networkStatus: NetworkUtil
 ) {
+
+    private val userInfo = DataSingleton.getInstance()?._userInfo
 
     fun getSchoolInfo(schoolKind: String, region: String, schoolType: String) : Single<SchoolInfo> =
         schoolInfoApi.getSchoolInfo(apiKey = BuildConfig.SCHOOL_API_KEY, schoolKind = schoolKind, region =  region, schoolType = schoolType)
@@ -47,8 +51,22 @@ class SchoolRepository @Inject constructor(
                     }
             }
 
-    fun getMeal(type: String, region: String, schoolName: String, year: Int, month: Int, day: Int): Single<Meal> =
-        schoolApi.getMeal(type, region, schoolName, year, month, day)
+    fun getMeal(year: Int, month: Int, day: Int): Single<Meal> =
+        schoolApi.getMeal(userInfo?.type.toString(), userInfo?.region.toString(), userInfo?.name.toString(), year, month, day)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .retryWhen {
+                Flowable.interval(3, TimeUnit.SECONDS)
+                    .retryUntil {
+                        if(networkStatus.networkInfo())
+                            return@retryUntil true
+
+                        false
+                    }
+            }
+
+    fun getSchedule(year: Int, month: Int, day: Int): Single<Schedule> =
+        schoolApi.getSchedule(userInfo?.type.toString(), userInfo?.region.toString(), userInfo?.name.toString(), year, month, day)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .retryWhen {

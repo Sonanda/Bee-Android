@@ -21,7 +21,7 @@ class CafeteriaPresenter @Inject constructor(
         val userInfo = DataSingleton.getInstance()?._userInfo
 
         addDisposable(
-            schoolApi.getMeal(userInfo?.type.toString(), userInfo?.region.toString(), userInfo?.name.toString(), year, month, day)
+            schoolApi.getMeal(year, month, day)
                 .subscribe(
                     {
                         setMeal(it)
@@ -39,22 +39,22 @@ class CafeteriaPresenter @Inject constructor(
 
         for (element in content) {
 
-            val meal = ArrayList<String>()
+            val mealArrayList = ArrayList<String>()
 
             for (i in element.indices) {
 
                 if (element[i].contains("&amp;"))
-                    meal.add(element[i].replace("&amp;", " / "))
+                    mealArrayList.add(element[i].replace("&amp;", " / "))
                 else
-                    meal.add(element[i])
+                    mealArrayList.add(element[i])
             }
 
-            val mealInfo = meal.toString().replace(",","\n").replace("[", "").replace("]", "")
+            val mealInfo = mealArrayList.toString().replace(",","\n").replace("[", "").replace("]", "")
 
             if (mealInfo != "")
-                mealList.add(mealInfo)
+                mealArrayList.add(mealInfo)
             else
-                mealList.add("급식 정보가 없습니다.")
+                mealArrayList.add("급식 정보가 없습니다.")
         }
 
         view.showMeal(mealList)

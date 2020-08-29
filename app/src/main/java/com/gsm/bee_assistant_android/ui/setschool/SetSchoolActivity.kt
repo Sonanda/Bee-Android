@@ -73,13 +73,9 @@ class SetSchoolActivity : BaseActivity(), SetSchoolContract.View, AdapterView.On
         skip_button.setOnClickListener(this)
     }
 
-    override fun showProgress() {
+    override fun showProgress() {}
 
-    }
-
-    override fun hideProgress() {
-
-    }
+    override fun hideProgress() {}
 
     override fun finishActivity() = finish()
 
