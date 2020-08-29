@@ -93,7 +93,7 @@ class SetSchoolDialogFragment : BaseDialogFragment(), SetSchoolDialogContract.Vi
 
     override fun showProgress() = progress.show()
 
-    override fun hideProgress() = progress.hide()
+    override fun hideProgress() = progress.hideWithDismiss()
 
     override fun showToast(message: String) {}
 

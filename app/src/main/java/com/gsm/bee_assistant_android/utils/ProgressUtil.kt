@@ -8,7 +8,7 @@ import com.gsm.bee_assistant_android.R
 
 class ProgressUtil(context: Context) {
 
-    private var dialog : Dialog = Dialog(context).apply {
+    private val dialog : Dialog = Dialog(context).apply {
         setContentView(R.layout.progress_bar)
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         setCanceledOnTouchOutside(false)
@@ -17,7 +17,10 @@ class ProgressUtil(context: Context) {
 
     fun show() = dialog.show()
 
-    fun hide() {
+    fun hideWithDismiss() {
         dialog.hide()
+        dialog.dismiss()
     }
+
+    fun hide() = dialog.hide()
 }

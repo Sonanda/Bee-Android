@@ -88,6 +88,12 @@ class SetSchoolPresenter @Inject constructor(
 
         val schoolInfoUpdate = SchoolInfoUpdate(email, schoolType, region, schoolName)
 
+        DataSingleton.getInstance()?._userInfo.let {
+            it?.email = email
+            it?.type = schoolType
+            it?.region = region
+        }
+
         addDisposable(
             userApi.updateSchoolInfo(schoolInfoUpdate)
                 .subscribe(

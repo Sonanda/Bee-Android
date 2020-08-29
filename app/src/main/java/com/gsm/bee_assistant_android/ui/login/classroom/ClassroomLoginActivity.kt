@@ -50,7 +50,7 @@ class ClassroomLoginActivity : AppCompatActivity(), ClassroomLoginContract.View 
 
     override fun showProgress() = progress.show()
 
-    override fun hideProgress() = progress.hide()
+    override fun hideProgress() = progress.hideWithDismiss()
 
     override fun startActivity(activityName: Class<*>) { startActivity(Intent(this, activityName)) }
 
