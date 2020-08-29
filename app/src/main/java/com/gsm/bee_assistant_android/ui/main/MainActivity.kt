@@ -19,6 +19,7 @@ import com.gsm.bee_assistant_android.databinding.ActivityMainBinding
 import com.gsm.bee_assistant_android.databinding.NavigationHeaderBinding
 import com.gsm.bee_assistant_android.ui.cafeteria.CafeteriaFragment
 import com.gsm.bee_assistant_android.ui.calendar.CalendarFragment
+import com.gsm.bee_assistant_android.ui.classroom.ClassroomFragment
 import com.gsm.bee_assistant_android.ui.setschool_dialog.SetSchoolDialogFragment
 import dagger.android.AndroidInjection
 import io.reactivex.Observable
@@ -125,6 +126,11 @@ class MainActivity : BaseActivity(), MainContract.View, BottomNavigationView.OnN
                 viewPager.currentItem = 2
                 return true
             }
+
+            R.id.page_classroom -> {
+                viewPager.currentItem = 3
+                return true
+            }
         }
 
         return false
@@ -137,6 +143,7 @@ class MainActivity : BaseActivity(), MainContract.View, BottomNavigationView.OnN
                 0 -> R.id.page_home
                 1 -> R.id.page_cafeteria
                 2 -> R.id.page_calendar
+                3 -> R.id.page_classroom
                 else -> error("error")
             }
         }
@@ -151,6 +158,7 @@ class MainActivity : BaseActivity(), MainContract.View, BottomNavigationView.OnN
                 0 -> MainFragment()
                 1 -> CafeteriaFragment()
                 2 -> CalendarFragment()
+                3 -> ClassroomFragment()
                 else -> error("error")
             }
         }

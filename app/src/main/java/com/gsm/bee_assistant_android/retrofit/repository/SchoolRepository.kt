@@ -60,5 +60,4 @@ class SchoolRepository @Inject constructor(
                         false
                     }
             }
-
 }

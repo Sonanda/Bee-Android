@@ -58,7 +58,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:itemTextColor="@color/bottom_bar_item_selector"
                 app:itemIconTint="@color/bottom_bar_item_selector"
-                app:itemBackground="@color/white"
+                android:background="@color/white"
                 app:menu="@menu/bottom_navigation_menu"
                 />
 
