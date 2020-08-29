@@ -12,5 +12,7 @@ class CafeteriaContract {
     interface Presenter: BasePresenter<View> {
 
         fun getMeal(year: Int, month: Int, day: Int)
+
+        fun checkUserSchoolInfo(): Boolean
     }
 }

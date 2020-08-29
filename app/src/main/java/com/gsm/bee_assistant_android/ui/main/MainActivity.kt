@@ -24,6 +24,8 @@ import com.gsm.bee_assistant_android.ui.setschool_dialog.SetSchoolDialogFragment
 import dagger.android.AndroidInjection
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_cafeteria.*
+import kotlinx.android.synthetic.main.fragment_calendar.*
 import kotlinx.android.synthetic.main.title_bar.*
 import javax.inject.Inject
 
@@ -85,8 +87,22 @@ class MainActivity : BaseActivity(), MainContract.View, BottomNavigationView.OnN
 
             it.listener = { schoolName ->
 
-                if(checkSchoolNameIsBlank(schoolName))
+                if(checkSchoolNameIsBlank(schoolName)) {
                     bindingNavigationHeader.userSchoolName.text = schoolName
+
+                    when(viewPager.currentItem) {
+
+                        1 -> {
+                            cafeteria_notification_textView.visibility = View.INVISIBLE
+                            cafeteria__calendarView.visibility = View.VISIBLE
+                        }
+
+                        2 -> {
+                            calendar_notification_textView.visibility = View.INVISIBLE
+                            calendar_view.visibility = View.VISIBLE
+                        }
+                    }
+                }
             }
 
             it.show(supportFragmentManager, "setSchoolDialog")

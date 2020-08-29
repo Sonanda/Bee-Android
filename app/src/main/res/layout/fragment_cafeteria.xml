@@ -1,22 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="cafeteria"
             type="com.gsm.bee_assistant_android.ui.cafeteria.CafeteriaFragment" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/cafeteria_notification_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="급식 정보를 확인을 위해 학교를 설정 해주세요."
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/darkGrayColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="invisible" />
 
         <CalendarView
             android:id="@+id/cafeteria__calendarView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

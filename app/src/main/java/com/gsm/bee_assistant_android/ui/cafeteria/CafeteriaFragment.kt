@@ -53,11 +53,27 @@ class CafeteriaFragment : BaseFragment(), CafeteriaContract.View {
         presenter.disposeDisposable()
     }
 
+    override fun onResume() {
+        super.onResume()
+        setUI()
+    }
+
     override fun init() {
 
-        Log.i("data", cafeteria__calendarView.date.toString())
+        setUI()
 
         cafeteria__calendarView.setOnDateChangeListener { _, year, month, dayOfMonth -> presenter.getMeal(year, month + 1, dayOfMonth) }
+    }
+
+    private fun setUI() {
+
+        if (!presenter.checkUserSchoolInfo()) {
+            cafeteria_notification_textView.visibility = View.VISIBLE
+            cafeteria__calendarView.visibility = View.INVISIBLE
+        } else {
+            cafeteria_notification_textView.visibility = View.INVISIBLE
+            cafeteria__calendarView.visibility = View.VISIBLE
+        }
     }
 
     override fun showMeal(mealList: ArrayList<String>) {

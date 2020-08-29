@@ -89,23 +89,33 @@ class SetSchoolDialogPresenter @Inject constructor(
 
         view.showProgress()
 
-        val email = DataSingleton.getInstance()?._userInfo?.email!!
+        if (schoolName.isBlank()) view.dismissDialog()
+        else {
 
-        val getRegionAndSchoolType = getRegionAndSchoolType(schoolName)
+            val email = DataSingleton.getInstance()?._userInfo?.email!!
 
-        val schoolInfoUpdate = SchoolInfoUpdate(email, getRegionAndSchoolType.second, getRegionAndSchoolType.first, schoolName)
+            val getRegionAndSchoolType = getRegionAndSchoolType(schoolName)
 
-        addDisposable(
-            userApi.updateSchoolInfo(schoolInfoUpdate)
-                .subscribe(
-                    {
-                        pref.setData(MyApplication.Key.USER_TOKEN.toString(), it.token).apply {
-                            view.hideProgress()
-                            view.dismissDialog()
-                        }
-                    }, {}
-                )
-        )
+            val schoolInfoUpdate = SchoolInfoUpdate(email, getRegionAndSchoolType.second, getRegionAndSchoolType.first, schoolName)
+
+            DataSingleton.getInstance()?._userInfo.let {
+                it?.type = getRegionAndSchoolType.second
+                it?.region = getRegionAndSchoolType.first
+                it?.region = schoolName
+            }
+
+            addDisposable(
+                userApi.updateSchoolInfo(schoolInfoUpdate)
+                    .subscribe(
+                        {
+                            pref.setData(MyApplication.Key.USER_TOKEN.toString(), it.token).apply {
+                                view.hideProgress()
+                                view.dismissDialog()
+                            }
+                        }, {}
+                    )
+            )
+        }
     }
 
     private fun getRegionAndSchoolType(schoolName: String): Pair<String, String> {

@@ -43,9 +43,26 @@ class CalendarFragment : BaseFragment(), CalendarContract.View {
         init()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        setUI()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         presenter.disposeDisposable()
+    }
+
+    private fun setUI() {
+
+        if (!presenter.checkUserSchoolInfo()) {
+            calendar_notification_textView.visibility = View.VISIBLE
+            calendar_view.visibility = View.INVISIBLE
+        } else {
+            calendar_notification_textView.visibility = View.INVISIBLE
+            calendar_view.visibility = View.VISIBLE
+        }
     }
 
     override fun showSchedule(scheduleList: ArrayList<String>) {
@@ -70,6 +87,8 @@ class CalendarFragment : BaseFragment(), CalendarContract.View {
     }
 
     override fun init() {
+
+        setUI()
 
         calendar_calendarView.setOnDateChangeListener { _, year, month, dayOfMonth -> presenter.getSchedule(year, month + 1, dayOfMonth) }
     }

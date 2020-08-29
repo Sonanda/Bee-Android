@@ -12,5 +12,7 @@ class CalendarContract {
     interface Presenter: BasePresenter<View> {
 
         fun getSchedule(year: Int, month: Int, day: Int)
+
+        fun checkUserSchoolInfo(): Boolean
     }
 }
