@@ -19,11 +19,9 @@ import javax.inject.Inject
 
 class GoogleLoginPresenter @Inject constructor(
     override val view: GoogleLoginContract.View,
+    private val pref: PreferenceManager,
     private val userApi: UserRepository
 ) : GoogleLoginContract.Presenter {
-
-    @Inject
-    lateinit var pref: PreferenceManager
 
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
 

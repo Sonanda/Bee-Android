@@ -20,11 +20,10 @@ import javax.inject.Inject
 
 class ClassroomLoginPresenter @Inject constructor(
     override val view: ClassroomLoginContract.View,
+    private val pref: PreferenceManager,
     private val classroomApi: ClassroomRepository,
     private val userApi: UserRepository
 ) : ClassroomLoginContract.Presenter {
-    @Inject
-    lateinit var pref: PreferenceManager
 
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
 

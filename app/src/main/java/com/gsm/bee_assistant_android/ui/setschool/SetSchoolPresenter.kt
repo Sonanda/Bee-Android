@@ -16,12 +16,10 @@ import javax.inject.Inject
 
 class SetSchoolPresenter @Inject constructor(
     override val view: SetSchoolContract.View, context: Context,
+    private val pref: PreferenceManager,
     private val schoolApi: SchoolRepository,
     private val userApi: UserRepository
 ) : SetSchoolContract.Presenter {
-
-    @Inject
-    lateinit var pref : PreferenceManager
 
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
 

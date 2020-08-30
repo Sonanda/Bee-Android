@@ -18,11 +18,9 @@ import javax.inject.Inject
 
 class SplashPresenter @Inject constructor(
     override val view: SplashContract.View,
+    private val pref: PreferenceManager,
     private val userApi: UserRepository
 ) : SplashContract.Presenter {
-
-    @Inject
-    lateinit var pref: PreferenceManager
 
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
 

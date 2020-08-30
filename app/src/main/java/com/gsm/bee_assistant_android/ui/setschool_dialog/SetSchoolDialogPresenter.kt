@@ -17,16 +17,11 @@ import javax.inject.Inject
 
 class SetSchoolDialogPresenter @Inject constructor(
     override val view: SetSchoolDialogContract.View,
-    context: Context,
+    private val pref: PreferenceManager,
     private val schoolApi: SchoolRepository,
-    private val userApi: UserRepository
+    private val userApi: UserRepository,
+    context: Context
 ) : SetSchoolDialogContract.Presenter {
-
-    @Inject
-    lateinit var schoolNameRetrofit: SchoolInfoApi
-
-    @Inject
-    lateinit var pref : PreferenceManager
 
     private val schoolKindIdList: Array<String> = context.resources.getStringArray(R.array.school_kind_id)
 

@@ -10,10 +10,10 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
-class MainPresenter @Inject constructor(override val view: MainContract.View) : MainContract.Presenter {
-
-    @Inject
-    lateinit var pref: PreferenceManager
+class MainPresenter @Inject constructor(
+    override val view: MainContract.View,
+    private val pref: PreferenceManager
+) : MainContract.Presenter {
 
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
