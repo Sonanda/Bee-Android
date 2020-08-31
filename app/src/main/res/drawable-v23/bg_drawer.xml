@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+
+    <!-- 뒷편 그림자 배경 스택 -->
+    <item>
+        <shape>
+            <padding
+                android:top="1dp" />
+
+            <solid android:color="#FFFFFF" />
+
+            <corners
+                android:topLeftRadius="40dp"
+                android:topRightRadius="40dp"/>
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding
+                android:top="4.7dp" />
+
+            <solid android:color="#20FF9900" />
+
+            <corners
+                android:topLeftRadius="40dp"
+                android:topRightRadius="40dp"/>
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding
+                android:top="4.8dp" />
+
+            <solid android:color="#30FF9900" />
+
+            <corners
+                android:topLeftRadius="40dp"
+                android:topRightRadius="40dp"/>
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding
+                android:top="4.9dp" />
+
+            <solid android:color="#40FF9900" />
+
+            <corners
+                android:topLeftRadius="40dp"
+                android:topRightRadius="40dp"/>
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding
+                android:top="5dp" />
+
+            <solid android:color="#50FF9900" />
+
+            <corners
+                android:topLeftRadius="40dp"
+                android:topRightRadius="40dp"/>
+        </shape>
+    </item>
+
+    <!-- 맨 앞의 흰바탕 배경 -->
+    <item>
+        <shape>
+            <solid android:color="@android:color/white" />
+
+            <corners
+                android:topLeftRadius="40dp"
+                android:topRightRadius="40dp"/>
+        </shape>
+    </item>
+
+</layer-list>
