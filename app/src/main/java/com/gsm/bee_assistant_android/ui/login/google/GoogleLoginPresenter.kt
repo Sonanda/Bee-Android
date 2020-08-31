@@ -35,15 +35,11 @@ class GoogleLoginPresenter @Inject constructor(
                 val account = result.signInAccount
                 val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
 
-                addDisposable(
-                    Observable.just(
-                        FirebaseAuth
-                            .getInstance()
-                            .signInWithCredential(credential)
-                    ).subscribe {
-                        getToken(account?.email.toString())
-                    }
-                )
+                FirebaseAuth
+                    .getInstance()
+                    .signInWithCredential(credential)
+                    .apply { getToken(account?.email.toString()) }
+
             }
         }
     }
@@ -82,21 +78,23 @@ class GoogleLoginPresenter @Inject constructor(
 
         val userInfo = DataSingleton.getInstance()?._userInfo!!
 
-        if (userInfo.access_token == null) {
-            view.startActivity(ClassroomLoginActivity::class.java)
-            view.finishActivity()
-        } else if (userInfo.name == null) {
-            view.startActivity(SetSchoolActivity::class.java)
-            view.finishActivity()
-        } else {
-            view.startActivity(MainActivity::class.java)
-            view.finishActivity()
+        when {
+            userInfo.access_token == null -> {
+                view.startActivity(ClassroomLoginActivity::class.java)
+                view.finishActivity()
+            }
+            userInfo.name == null -> {
+                view.startActivity(SetSchoolActivity::class.java)
+                view.finishActivity()
+            }
+            else -> {
+                view.startActivity(MainActivity::class.java)
+                view.finishActivity()
+            }
         }
     }
 
-    override fun setSchoolInfo() {
-
-    }
+    override fun setSchoolInfo() {}
 
     override fun googleSignIn(signInIntent: Intent) = view.showLogin(signInIntent)
 

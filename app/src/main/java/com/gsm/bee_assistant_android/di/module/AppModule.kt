@@ -2,14 +2,12 @@ package com.gsm.bee_assistant_android.di.module
 
 import android.app.Application
 import android.content.Context
-import androidx.fragment.app.Fragment
 import com.gsm.bee_assistant_android.di.app.MyApplication
 import com.gsm.bee_assistant_android.utils.NetworkUtil
 import com.gsm.bee_assistant_android.utils.ProgressUtil
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -27,6 +25,7 @@ class AppModule {
     fun provideNetworkStatus(context: Context) = NetworkUtil(context)
 
     @Provides
+    @Singleton
     fun provideProgress(context: Context) = ProgressUtil(context)
 
     @Provides

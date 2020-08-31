@@ -20,7 +20,6 @@ class ClassroomLoginActivity : AppCompatActivity(), ClassroomLoginContract.View 
     @Inject
     override lateinit var presenter: ClassroomLoginContract.Presenter
 
-    @Inject
     lateinit var progress: ProgressUtil
 
     override lateinit var binding: ActivityClassroomLoginBinding
@@ -30,6 +29,8 @@ class ClassroomLoginActivity : AppCompatActivity(), ClassroomLoginContract.View 
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_classroom_login)
         binding.classroomLogin = this
+
+        progress = ProgressUtil(this)
 
         AndroidInjection.inject(this)
     }

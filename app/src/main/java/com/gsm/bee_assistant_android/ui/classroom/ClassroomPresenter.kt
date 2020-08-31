@@ -58,6 +58,8 @@ class ClassroomPresenter @Inject constructor(
 
                     val classList = arrayListOf<ArrayList<String>>()
 
+                    if (it.message != null) return@map classList
+
                     for (i in it.courseWork.indices) {
 
                         titleList.add(it.courseWork[i].title)

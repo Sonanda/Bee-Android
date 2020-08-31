@@ -77,10 +77,16 @@ class ClassroomFragment : BaseFragment(), ClassroomContract.View {
 
         presenter.classList.observe(viewLifecycleOwner, Observer {
 
-            recyclerView.visibility = View.VISIBLE
+            if (!it.classList.isNullOrEmpty()) {
+                recyclerView.visibility = View.VISIBLE
+                classroom_notification_textView.visibility = View.INVISIBLE
 
-            recyclerView.adapter?.notifyDataSetChanged()
-            recyclerView.adapter = ClassroomAdapter(this, it)
+                recyclerView.adapter?.notifyDataSetChanged()
+                recyclerView.adapter = ClassroomAdapter(this, it)
+            } else {
+                classroom_notification_textView.text = "클래스룸 정보가 없습니다."
+                classroom_notification_textView.visibility = View.VISIBLE
+            }
         })
     }
 
@@ -102,6 +108,7 @@ class ClassroomFragment : BaseFragment(), ClassroomContract.View {
     private fun setUI() {
 
         if (!presenter.checkUserClassroomTokenInfo()) {
+            classroom_notification_textView.text = "클래스룸 로그인을 통해 과제를 확인하세요."
             classroom_notification_textView.visibility = View.VISIBLE
             connect_classroom_button.visibility = View.VISIBLE
             recyclerView.visibility = View.INVISIBLE

@@ -1,7 +1,8 @@
 package com.gsm.bee_assistant_android.retrofit.domain.classroom
 
 data class ResponseClassWork(
-    val courseWork: List<CourseWork>
+    val courseWork: List<CourseWork>,
+    val message: String?= null
 )
 
 data class CourseWork(

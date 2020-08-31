@@ -17,8 +17,7 @@ class GoogleLoginActivity : BaseActivity(), GoogleLoginContract.View {
 
     @Inject
     override lateinit var presenter : GoogleLoginContract.Presenter
-
-    @Inject
+    
     lateinit var progress: ProgressUtil
 
     override lateinit var binding: ActivityGoogleLoginBinding
@@ -30,6 +29,8 @@ class GoogleLoginActivity : BaseActivity(), GoogleLoginContract.View {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_google_login)
         binding.googleLogin = this
+
+        progress = ProgressUtil(this)
 
         AndroidInjection.inject(this)
     }
