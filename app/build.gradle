@@ -8,10 +8,6 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
-    def keystorePropertiesFile = rootProject.file("keystore.properties")
-    def keystoreProperties = new Properties()
-    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-
     defaultConfig {
         applicationId "com.gsm.bee_assistant_android"
         minSdkVersion 23
@@ -21,9 +17,25 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "SCHOOL_API_KEY", keystoreProperties["SCHOOL_API_KEY"]
-        buildConfigField "String", "SCHOOL_INFO_URL", keystoreProperties["SCHOOL_INFO_URL"]
-        buildConfigField "String", "BASE_URL", keystoreProperties["BASE_URL"]
+        if (rootProject.file("keystore.properties").exists()) {
+
+            def keystorePropertiesFile = rootProject.file("keystore.properties")
+            def keystoreProperties = new Properties()
+            keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+            buildConfigField "String", "SCHOOL_API_KEY", keystoreProperties["SCHOOL_API_KEY"]
+            buildConfigField "String", "SCHOOL_INFO_URL", keystoreProperties["SCHOOL_INFO_URL"]
+            buildConfigField "String", "BASE_URL", keystoreProperties["BASE_URL"]
+        } else {
+
+            def keystorePropertiesFile = rootProject.file("keystore_private.properties")
+            def keystoreProperties = new Properties()
+            keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+            buildConfigField "String", "SCHOOL_API_KEY", keystoreProperties["SCHOOL_API_KEY"]
+            buildConfigField "String", "SCHOOL_INFO_URL", keystoreProperties["SCHOOL_INFO_URL"]
+            buildConfigField "String", "BASE_URL", keystoreProperties["BASE_URL"]
+        }
     }
 
     buildTypes {
