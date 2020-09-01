@@ -39,10 +39,7 @@ class CafeteriaPresenter @Inject constructor(
 
                         val mealInfo = meal.toString().replace(",","\n").replace("[", "").replace("]", "")
 
-                        if (mealInfo != "")
-                            mealList.add(mealInfo)
-                        else
-                            mealList.add("급식 정보가 없습니다.")
+                        mealList.add(mealInfo)
                     }
 
                     return@map mealList

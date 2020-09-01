@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="10dp"
     android:paddingBottom="10dp"
     android:layout_margin="10dp">
 
@@ -19,6 +18,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/title_breakfast"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="조식"
@@ -34,12 +34,23 @@
                 style="@style/content_font"/>
 
             <TextView
+                android:id="@+id/title_launch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="중식"
                 android:gravity="center"
                 android:layout_marginTop="20dp"
                 style="@style/title_font_black"/>
+
+            <TextView
+                android:id="@+id/meal_notification_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="급식 정보가 없습니다."
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                style="@style/content_font"/>
 
             <TextView
                 android:id="@+id/launch"
@@ -50,6 +61,7 @@
                 style="@style/content_font"/>
 
             <TextView
+                android:id="@+id/title_dinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="석식"
