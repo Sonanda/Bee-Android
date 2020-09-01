@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.databinding.ViewDataBinding
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.base.BaseDialogFragment
@@ -34,6 +35,7 @@ class SetSchoolDialogFragment : BaseDialogFragment(), SetSchoolDialogContract.Vi
         super.onAttach(context)
 
         AndroidSupportInjection.inject(this)
+
         progress = ProgressUtil(this.context!!)
     }
 
@@ -100,7 +102,7 @@ class SetSchoolDialogFragment : BaseDialogFragment(), SetSchoolDialogContract.Vi
 
     override fun hideProgress() = progress.hide()
 
-    override fun showToast(message: String) {}
+    override fun showToast(message: String) = Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
 
     override fun startActivity(activityName: Class<*>) {}
 }

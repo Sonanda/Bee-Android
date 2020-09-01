@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.gsm.bee_assistant_android.ui.calendar
 
 import android.content.Context

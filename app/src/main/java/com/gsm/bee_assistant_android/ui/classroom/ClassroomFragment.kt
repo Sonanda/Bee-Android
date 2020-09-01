@@ -115,6 +115,7 @@ class ClassroomFragment : BaseFragment(), ClassroomContract.View {
         } else {
             classroom_notification_textView.visibility = View.INVISIBLE
             connect_classroom_button.visibility = View.INVISIBLE
+            recyclerView.visibility = View.INVISIBLE
 
             presenter.getClassList()
         }

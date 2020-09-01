@@ -42,13 +42,13 @@ class MainActivity : BaseActivity(), MainContract.View, BottomNavigationView.OnN
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        AndroidInjection.inject(this)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.main = this
 
         bindingNavigationHeader = NavigationHeaderBinding.bind(navigation_view.getHeaderView(0))
         bindingNavigationHeader.headerNavigation = this
-
-        AndroidInjection.inject(this)
 
         init()
     }

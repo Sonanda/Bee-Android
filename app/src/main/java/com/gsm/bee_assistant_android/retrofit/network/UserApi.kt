@@ -31,5 +31,5 @@ interface UserApi {
     fun getUserInfoTest(@Header("x-access-token") token: String): Call<UserInfo>
 
     @PATCH("auth")
-    fun updateSchoolInfo(@Body schoolInfoUpdate: SchoolInfoUpdate): Single<UserToken>
+    fun updateSchoolInfo(@Body schoolInfoUpdate: SchoolInfoUpdate): Call<UserToken>
 }

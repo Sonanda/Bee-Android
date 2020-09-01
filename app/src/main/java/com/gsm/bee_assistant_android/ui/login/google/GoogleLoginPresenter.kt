@@ -35,11 +35,15 @@ class GoogleLoginPresenter @Inject constructor(
                 val account = result.signInAccount
                 val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
 
-                FirebaseAuth
-                    .getInstance()
-                    .signInWithCredential(credential)
-                    .apply { getToken(account?.email.toString()) }
-
+                addDisposable(
+                    Observable.just(
+                        FirebaseAuth
+                            .getInstance()
+                            .signInWithCredential(credential)
+                    ).subscribe(
+                        { getToken(account?.email.toString()) }, { it.printStackTrace() }
+                    )
+                )
             }
         }
     }
@@ -94,7 +98,9 @@ class GoogleLoginPresenter @Inject constructor(
         }
     }
 
-    override fun setSchoolInfo() {}
+    override fun setSchoolInfo() {
+
+    }
 
     override fun googleSignIn(signInIntent: Intent) = view.showLogin(signInIntent)
 

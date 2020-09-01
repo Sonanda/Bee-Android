@@ -1,8 +1,10 @@
 package com.gsm.bee_assistant_android.di.module
 
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import com.gsm.bee_assistant_android.di.app.MyApplication
+import com.gsm.bee_assistant_android.ui.login.classroom.ClassroomLoginActivity
 import com.gsm.bee_assistant_android.utils.NetworkUtil
 import com.gsm.bee_assistant_android.utils.ProgressUtil
 import dagger.Module

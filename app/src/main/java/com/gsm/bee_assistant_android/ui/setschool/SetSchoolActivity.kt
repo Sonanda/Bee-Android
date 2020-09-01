@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.base.BaseActivity
 import com.gsm.bee_assistant_android.databinding.ActivitySetSchoolBinding
+import com.gsm.bee_assistant_android.utils.ProgressUtil
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_set_school.*
 import javax.inject.Inject
@@ -19,16 +20,21 @@ class SetSchoolActivity : BaseActivity(), SetSchoolContract.View, AdapterView.On
     @Inject
     override lateinit var presenter : SetSchoolContract.Presenter
 
+    @Inject
+    lateinit var progress: ProgressUtil
+
     override lateinit var binding: ActivitySetSchoolBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_school)
 
+        AndroidInjection.inject(this)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_set_school)
         binding.setschool = this
 
-        AndroidInjection.inject(this)
+        progress = ProgressUtil(this)
 
         init()
     }
@@ -73,9 +79,9 @@ class SetSchoolActivity : BaseActivity(), SetSchoolContract.View, AdapterView.On
         skip_button.setOnClickListener(this)
     }
 
-    override fun showProgress() {}
+    override fun showProgress() = progress.show()
 
-    override fun hideProgress() {}
+    override fun hideProgress() = progress.hide()
 
     override fun finishActivity() = finish()
 

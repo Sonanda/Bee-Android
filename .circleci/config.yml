@@ -14,4 +14,4 @@ jobs:
 
 dependencies:
     override:
-        - chmod +x gradlew
+        -chmod +x gradlew

@@ -5,20 +5,27 @@ import android.util.Log
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.di.app.MyApplication
 import com.gsm.bee_assistant_android.retrofit.domain.user.SchoolInfoUpdate
+import com.gsm.bee_assistant_android.retrofit.domain.user.UserToken
 import com.gsm.bee_assistant_android.retrofit.network.SchoolInfoApi
 import com.gsm.bee_assistant_android.retrofit.repository.SchoolRepository
 import com.gsm.bee_assistant_android.retrofit.repository.UserRepository
 import com.gsm.bee_assistant_android.utils.DataSingleton
+import com.gsm.bee_assistant_android.utils.NetworkUtil
 import com.gsm.bee_assistant_android.utils.PreferenceManager
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class SetSchoolDialogPresenter @Inject constructor(
     override val view: SetSchoolDialogContract.View,
     override val compositeDisposable: CompositeDisposable,
     private val pref: PreferenceManager,
+    private val networkStatus: NetworkUtil,
     private val schoolApi: SchoolRepository,
     private val userApi: UserRepository,
     context: Context
@@ -97,17 +104,32 @@ class SetSchoolDialogPresenter @Inject constructor(
                 it?.name = schoolName
             }
 
-            addDisposable(
                 userApi.updateSchoolInfo(schoolInfoUpdate)
-                    .subscribe(
-                        {
-                            pref.setData(MyApplication.Key.USER_TOKEN.toString(), it.token).apply {
-                                view.hideProgress()
-                                view.dismissDialog()
+                    .enqueue(object : Callback<UserToken>{
+
+                        override fun onResponse(call: Call<UserToken>, response: Response<UserToken>) {
+
+                            when {
+                                response.code() == 204 -> {
+                                    view.hideProgress()
+                                    view.showToast("이미 설정되어 있는 학교입니다.")
+                                }
+                                response.code() == 201 -> {
+                                    pref.setData(MyApplication.Key.USER_TOKEN.toString(), response.body()!!.token).apply {
+                                        view.hideProgress()
+                                        view.dismissDialog()
+                                    }
+                                }
+                                else -> {
+                                    view.hideProgress()
+                                    view.showToast("네트워크 상태를 확인해주세요.")
+                                }
                             }
-                        }, {}
-                    )
-            )
+                        }
+
+                        override fun onFailure(call: Call<UserToken>, t: Throwable) {}
+                    })
+
         }
     }
 

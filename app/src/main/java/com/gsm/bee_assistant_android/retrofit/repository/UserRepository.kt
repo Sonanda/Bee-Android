@@ -10,6 +10,7 @@ import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import retrofit2.Call
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -63,18 +64,7 @@ class UserRepository @Inject constructor(
                     }
             }
 
-    fun updateSchoolInfo(schoolInfoUpdate: SchoolInfoUpdate): Single<UserToken> =
+    fun updateSchoolInfo(schoolInfoUpdate: SchoolInfoUpdate): Call<UserToken> =
         userApi.updateSchoolInfo(schoolInfoUpdate)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .retryWhen {
-                Flowable.interval(3, TimeUnit.SECONDS)
-                    .onBackpressureBuffer()
-                    .retryUntil {
-                        if(networkStatus.networkInfo())
-                            return@retryUntil true
 
-                        false
-                    }
-            }
 }

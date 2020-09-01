@@ -16,8 +16,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.login.classroom.ClassroomLoginActivity"/>
-        <activity android:name=".ui.setschool.SetSchoolActivity" >
-        </activity>
+        <activity android:name=".ui.setschool.SetSchoolActivity"/>
         <activity android:name=".ui.login.google.GoogleLoginActivity"/>
         <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>

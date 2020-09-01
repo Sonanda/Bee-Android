@@ -5,6 +5,7 @@ import android.util.Log
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.di.app.MyApplication
 import com.gsm.bee_assistant_android.retrofit.domain.user.SchoolInfoUpdate
+import com.gsm.bee_assistant_android.retrofit.domain.user.UserToken
 import com.gsm.bee_assistant_android.retrofit.repository.SchoolRepository
 import com.gsm.bee_assistant_android.retrofit.repository.UserRepository
 import com.gsm.bee_assistant_android.ui.main.MainActivity
@@ -12,6 +13,9 @@ import com.gsm.bee_assistant_android.utils.DataSingleton
 import com.gsm.bee_assistant_android.utils.PreferenceManager
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import javax.inject.Inject
 
 class SetSchoolPresenter @Inject constructor(
@@ -23,11 +27,14 @@ class SetSchoolPresenter @Inject constructor(
 ) : SetSchoolContract.Presenter {
 
     override val regionList: Array<String> = context.resources.getStringArray(R.array.region)
-    override val schoolKindList: Array<String> = context.resources.getStringArray(R.array.school_kind)
+    override val schoolKindList: Array<String> =
+        context.resources.getStringArray(R.array.school_kind)
 
-    private val schoolKindIdList: Array<String> = context.resources.getStringArray(R.array.school_kind_id)
+    private val schoolKindIdList: Array<String> =
+        context.resources.getStringArray(R.array.school_kind_id)
     private val regionIdList: Array<String> = context.resources.getStringArray(R.array.region_id)
-    private val schoolTypeIdList: Array<String> = context.resources.getStringArray(R.array.school_type_id)
+    private val schoolTypeIdList: Array<String> =
+        context.resources.getStringArray(R.array.school_type_id)
 
     override var schoolNameList: MutableList<String> = mutableListOf("학교 이름")
 
@@ -46,7 +53,7 @@ class SetSchoolPresenter @Inject constructor(
 
                         val content = it.dataSearch!!.content!!
 
-                        for(index in 0 until content.size) {
+                        for (index in 0 until content.size) {
                             schoolNameList.add(content[index].schoolName!!)
                         }
 
@@ -66,9 +73,16 @@ class SetSchoolPresenter @Inject constructor(
         getSchoolInfo(schoolKindId, regionId, schoolTypeId)
     }
 
-    override fun checkSpinnerIndex(region: String, schoolType: String, schoolName: String): Boolean {
+    override fun checkSpinnerIndex(
+        region: String,
+        schoolType: String,
+        schoolName: String
+    ): Boolean {
 
-        if(regionList.indexOf(region) != 0 && schoolKindList.indexOf(schoolType) != 0 && schoolNameList.indexOf(schoolName) != 0) return true
+        if (regionList.indexOf(region) != 0 && schoolKindList.indexOf(schoolType) != 0 && schoolNameList.indexOf(
+                schoolName
+            ) != 0
+        ) return true
 
         return false
     }
@@ -91,20 +105,30 @@ class SetSchoolPresenter @Inject constructor(
             it?.region = region
         }
 
-        addDisposable(
-            userApi.updateSchoolInfo(schoolInfoUpdate)
-                .subscribe(
-                    {
-                        pref.setData(MyApplication.Key.USER_TOKEN.toString(), it.token)
+        userApi.updateSchoolInfo(schoolInfoUpdate)
+            .enqueue(object : Callback<UserToken> {
+                override fun onResponse(call: Call<UserToken>, response: Response<UserToken>) {
 
-                        setSchoolName(schoolName).apply {
-                            view.hideProgress()
-                            view.startActivity(MainActivity::class.java)
-                            view.finishActivity()
+                    when {
+
+                        response.code() == 201 -> {
+                            pref.setData(MyApplication.Key.USER_TOKEN.toString(), response.body()!!.token)
+
+                            setSchoolName(schoolName).apply {
+                                view.hideProgress()
+                                view.startActivity(MainActivity::class.java)
+                                view.finishActivity()
+                            }
                         }
-                    }, {}
-                )
-        )
+                        else -> {
+                            view.hideProgress()
+                            view.showToast("네트워크 상태를 확인해주세요.")
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<UserToken>, t: Throwable) {}
+            })
     }
 
     override fun addDisposable(disposable: Disposable) { compositeDisposable.add(disposable) }

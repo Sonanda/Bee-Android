@@ -20,10 +20,10 @@ class SplashActivity : BaseActivity(), SplashContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        AndroidInjection.inject(this)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
         binding.splash = this
-
-        AndroidInjection.inject(this)
 
         init()
     }
