@@ -1,6 +1,5 @@
 package com.gsm.bee_assistant_android.ui.setschool_dialog
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,33 +10,21 @@ import android.widget.Toast
 import androidx.databinding.ViewDataBinding
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.base.BaseDialogFragment
-import com.gsm.bee_assistant_android.utils.ProgressUtil
-import dagger.android.support.AndroidSupportInjection
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.search_bar.*
 import kotlinx.android.synthetic.main.set_school_dialog.*
 import javax.inject.Inject
 
-class SetSchoolDialogFragment : BaseDialogFragment(), SetSchoolDialogContract.View {
+class SetSchoolDialogFragment : BaseDialogFragment<ViewDataBinding>(
+    R.layout.set_school_dialog
+), SetSchoolDialogContract.View {
 
     @Inject
     override lateinit var presenter: SetSchoolDialogContract.Presenter
 
-    override lateinit var binding: ViewDataBinding
-
-    private lateinit var progress: ProgressUtil
-
     private lateinit var schoolNameList: MutableList<String>
 
     var listener: (String) -> Unit = { inputSchoolName ->  presenter.checkSchoolName(inputSchoolName) }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        AndroidSupportInjection.inject(this)
-
-        progress = ProgressUtil(this.context!!)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.set_school_dialog, container, false)

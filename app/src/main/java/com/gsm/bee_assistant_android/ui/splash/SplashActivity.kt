@@ -4,26 +4,23 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.gsm.bee_assistant_android.BR
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.base.BaseActivity
 import com.gsm.bee_assistant_android.databinding.ActivitySplashBinding
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
-class SplashActivity : BaseActivity(), SplashContract.View {
+class SplashActivity : BaseActivity<ActivitySplashBinding>(
+    R.layout.activity_splash,
+    BR.splash
+), SplashContract.View {
 
     @Inject
     override lateinit var presenter : SplashContract.Presenter
 
-    override lateinit var binding: ActivitySplashBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        AndroidInjection.inject(this)
-
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
-        binding.splash = this
 
         init()
     }

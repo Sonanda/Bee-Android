@@ -6,14 +6,13 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.GravityCompat
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.gsm.bee_assistant_android.BR
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.base.BaseActivity
 import com.gsm.bee_assistant_android.databinding.ActivityMainBinding
@@ -30,22 +29,18 @@ import kotlinx.android.synthetic.main.fragment_calendar.*
 import kotlinx.android.synthetic.main.title_bar.*
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(), MainContract.View, BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity<ActivityMainBinding>(
+    R.layout.activity_main,
+    BR.main
+), MainContract.View, BottomNavigationView.OnNavigationItemSelectedListener {
 
     @Inject
     override lateinit var presenter : MainContract.Presenter
-
-    override lateinit var binding: ActivityMainBinding
 
     private lateinit var bindingNavigationHeader: NavigationHeaderBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        AndroidInjection.inject(this)
-
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding.main = this
 
         bindingNavigationHeader = NavigationHeaderBinding.bind(navigation_view.getHeaderView(0))
         bindingNavigationHeader.headerNavigation = this
@@ -54,7 +49,7 @@ class MainActivity : BaseActivity(), MainContract.View, BottomNavigationView.OnN
     }
 
     override fun init() {
-        show_navigation_bar_button.setOnClickListener(this)
+        show_navigation_bar_button.setOnClickListener(onClickListener)
         bindingNavigationHeader.userEmail.text = presenter.getUserEmail()
         bindingNavigationHeader.userSchoolName.text = presenter.getSchoolName()
 
@@ -70,8 +65,8 @@ class MainActivity : BaseActivity(), MainContract.View, BottomNavigationView.OnN
         presenter.disposeDisposable()
     }
 
-    override fun onClick(view: View) {
-        when(view.id) {
+    private val onClickListener = View.OnClickListener {
+        when(it.id) {
             R.id.show_navigation_bar_button ->
                 presenter.addDisposable(
                     Observable.just(drawer_layout.openDrawer(GravityCompat.END))
@@ -80,9 +75,9 @@ class MainActivity : BaseActivity(), MainContract.View, BottomNavigationView.OnN
         }
     }
 
-    override fun onClickLogoutButton() = presenter.logout()
+    fun onClickLogoutButton() = presenter.logout()
 
-    override fun onClickChangeSchoolButton() {
+    fun onClickChangeSchoolButton() {
 
         val dialog = SetSchoolDialogFragment()
 

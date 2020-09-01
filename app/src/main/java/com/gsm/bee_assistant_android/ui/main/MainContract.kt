@@ -5,15 +5,11 @@ import com.gsm.bee_assistant_android.base.BaseView
 
 class MainContract {
 
-    interface View : BaseView<Presenter>, android.view.View.OnClickListener {
+    interface View : BaseView<Presenter> {
 
         fun finishAffinityActivity()
 
         fun finishActivity()
-
-        fun onClickLogoutButton()
-
-        fun onClickChangeSchoolButton()
     }
 
     interface Presenter : BasePresenter<View> {

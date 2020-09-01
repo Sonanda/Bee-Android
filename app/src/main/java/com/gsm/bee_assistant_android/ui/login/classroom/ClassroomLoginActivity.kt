@@ -2,46 +2,28 @@ package com.gsm.bee_assistant_android.ui.login.classroom
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.view.View
-import androidx.databinding.DataBindingUtil
+import com.gsm.bee_assistant_android.BR
 import com.gsm.bee_assistant_android.R
+import com.gsm.bee_assistant_android.base.BaseActivity
 import com.gsm.bee_assistant_android.databinding.ActivityClassroomLoginBinding
 import com.gsm.bee_assistant_android.retrofit.domain.classroom.ClassroomToken
 import com.gsm.bee_assistant_android.ui.setschool.SetSchoolActivity
-import com.gsm.bee_assistant_android.utils.ProgressUtil
-import dagger.android.AndroidInjection
-import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.activity_classroom_login.*
 import javax.inject.Inject
 
-class ClassroomLoginActivity : AppCompatActivity(), ClassroomLoginContract.View {
+class ClassroomLoginActivity : BaseActivity<ActivityClassroomLoginBinding>(
+    R.layout.activity_classroom_login,
+    BR.classroom
+), ClassroomLoginContract.View {
 
     @Inject
     override lateinit var presenter: ClassroomLoginContract.Presenter
-
-    @Inject
-    lateinit var progress: ProgressUtil
-
-    override lateinit var binding: ActivityClassroomLoginBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        AndroidInjection.inject(this)
-
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_classroom_login)
-        binding.classroomLogin = this
-
-        progress = ProgressUtil(this)
-    }
 
     override fun onDestroy() {
         super.onDestroy()
 
         presenter.disposeDisposable()
-
     }
 
     override fun showClassroomWebView(url: String) = startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))

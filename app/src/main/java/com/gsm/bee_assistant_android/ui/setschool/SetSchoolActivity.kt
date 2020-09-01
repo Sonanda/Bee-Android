@@ -2,39 +2,27 @@ package com.gsm.bee_assistant_android.ui.setschool
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
+import com.gsm.bee_assistant_android.BR
 import com.gsm.bee_assistant_android.R
 import com.gsm.bee_assistant_android.base.BaseActivity
 import com.gsm.bee_assistant_android.databinding.ActivitySetSchoolBinding
-import com.gsm.bee_assistant_android.utils.ProgressUtil
-import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_set_school.*
 import javax.inject.Inject
 
-class SetSchoolActivity : BaseActivity(), SetSchoolContract.View, AdapterView.OnItemSelectedListener, View.OnClickListener {
+class SetSchoolActivity : BaseActivity<ActivitySetSchoolBinding>(
+    R.layout.activity_set_school,
+    BR.setschool
+), SetSchoolContract.View, AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     @Inject
     override lateinit var presenter : SetSchoolContract.Presenter
 
-    @Inject
-    lateinit var progress: ProgressUtil
-
-    override lateinit var binding: ActivitySetSchoolBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_school)
-
-        AndroidInjection.inject(this)
-
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_set_school)
-        binding.setschool = this
-
-        progress = ProgressUtil(this)
 
         init()
     }
