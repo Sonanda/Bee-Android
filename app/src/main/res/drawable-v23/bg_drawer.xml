@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
-
-
     <!-- 뒷편 그림자 배경 스택 -->
     <item>
         <shape>
             <padding
-                android:top="-4dp" />
+                android:top="-4dp"
+                android:right="-2dp"
+                android:left="-2dp"/>
 
             <solid android:color="#FFFFFF" />
 
@@ -36,8 +36,8 @@
             <solid android:color="#30FF9900" />
 
             <corners
-                android:topLeftRadius="20dp"
-                android:topRightRadius="20dp"/>
+                android:topLeftRadius="22dp"
+                android:topRightRadius="22dp"/>
         </shape>
     </item>
     <item>
@@ -51,6 +51,18 @@
                 android:topLeftRadius="20dp"
                 android:topRightRadius="20dp"/>
         </shape>
+    </item>
+    <item>
+    <shape>
+    <padding
+        android:top="4dp" />
+
+    <solid android:color="#50FF9900" />
+
+    <corners
+        android:topLeftRadius="20dp"
+        android:topRightRadius="20dp"/>
+    </shape>
     </item>
 
     <!-- 맨 앞의 흰바탕 배경 -->

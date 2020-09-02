@@ -70,9 +70,10 @@ class ClassroomFragment : BaseFragment<FragmentClassroomBinding>(
 
     override fun showClassWork(classList: ArrayList<ArrayList<String>>) {
 
-        BottomSheetDialog(this.requireContext()).let {
+        BottomSheetDialog(this.requireContext(), R.style.BottomSheetDialogTheme).let {
+
             it.setContentView(layoutInflater.inflate(R.layout.class_work_list_view, null))
-            it.classWork_listView.adapter = ArrayAdapter(this.requireContext(), R.layout.list_view_item, classList[0])
+            it.classWork_listView.adapter = ArrayAdapter(this.requireContext(), R.layout.list_view_item, R.id.list_textView, classList[0])
 
             it.classWork_listView.setOnItemClickListener { _, _, position, _ ->
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(classList[1][position])))
