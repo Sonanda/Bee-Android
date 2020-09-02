@@ -39,7 +39,7 @@ class CafeteriaPresenter @Inject constructor(
 
                         val mealInfo = meal.toString().replace(",","\n").replace("[", "").replace("]", "")
 
-                        mealList.add(mealInfo)
+                         mealList.add(mealInfo)
                     }
 
                     return@map mealList

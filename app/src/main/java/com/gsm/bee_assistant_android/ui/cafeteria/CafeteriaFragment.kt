@@ -1,6 +1,7 @@
 package com.gsm.bee_assistant_android.ui.cafeteria
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -55,7 +56,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding>(
                 it.setContentView(layoutInflater.inflate(R.layout.meal_table, null))
 
                 when {
-                    mealList[0] != "" && mealList[1] != "" && mealList[2] != "" -> {
+                    mealList[0].isNotBlank() && mealList[1].isNotBlank() && mealList[2].isNotBlank() -> {
 
                         setBottomSheetDialogUI(it, true)
 
@@ -63,7 +64,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding>(
                         it.launch.text = mealList[1]
                         it.dinner.text = mealList[2]
                     }
-                    mealList[0] == "" && mealList[1] == "" && mealList[2] == "" -> {
+                    mealList[0].isBlank() && mealList[1].isBlank() && mealList[2].isBlank() -> {
 
                         setBottomSheetDialogUI(it, false)
 
@@ -71,28 +72,37 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding>(
                     }
                     else -> {
 
-                        if (mealList[0] != "") {
+                        if (mealList[0].isNotBlank()) {
 
                             setBottomSheetDialogUI(it, true)
                             it.breakfast.text = mealList[0]
+
+                            it.title_breakfast.visibility = View.VISIBLE
+                            it.breakfast.visibility = View.VISIBLE
                         } else {
                             it.title_breakfast.visibility = View.GONE
                             it.breakfast.visibility = View.GONE
                         }
 
-                        if (mealList[1] != "") {
+                        if (mealList[1].isNotBlank()) {
 
                             setBottomSheetDialogUI(it, true)
                             it.launch.text = mealList[1]
+
+                            it.title_launch.visibility = View.VISIBLE
+                            it.launch.visibility = View.VISIBLE
                         } else {
                             it.title_launch.visibility = View.GONE
                             it.launch.visibility = View.GONE
                         }
 
-                        if (mealList[2] != "") {
+                        if (mealList[2].isNotBlank()) {
 
                             setBottomSheetDialogUI(it, true)
                             it.dinner.text = mealList[2]
+
+                            it.title_dinner.visibility = View.VISIBLE
+                            it.dinner.visibility = View.VISIBLE
                         } else {
                             it.title_dinner.visibility = View.GONE
                             it.dinner.visibility = View.GONE
